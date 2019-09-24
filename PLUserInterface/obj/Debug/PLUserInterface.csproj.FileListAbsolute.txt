@@ -1,0 +1,9 @@
+D:\Shubham\FinanceCaseStudy\PLUserInterface\bin\PLUserInterface.dll.config
+D:\Shubham\FinanceCaseStudy\PLUserInterface\bin\PLUserInterface.dll
+D:\Shubham\FinanceCaseStudy\PLUserInterface\bin\PLUserInterface.pdb
+D:\Shubham\FinanceCaseStudy\PLUserInterface\obj\Debug\PLUserInterface.dll
+D:\Shubham\FinanceCaseStudy\PLUserInterface\obj\Debug\PLUserInterface.pdb
+D:\Shubham\FinanceCaseStudy\PLUserInterface\bin\AjaxControlToolkit.dll
+D:\Shubham\FinanceCaseStudy\PLUserInterface\obj\Debug\PLUserInterface.csprojResolveAssemblyReference.cache
+D:\Shubham\FinanceCaseStudy\PLUserInterface\bin\BLL.dll
+D:\Shubham\FinanceCaseStudy\PLUserInterface\bin\BLL.pdb

@@ -1,0 +1,4 @@
+D:\Shubham\FinanceCaseStudy\BLL\bin\Debug\BLL.dll
+D:\Shubham\FinanceCaseStudy\BLL\bin\Debug\BLL.pdb
+D:\Shubham\FinanceCaseStudy\BLL\obj\Debug\BLL.dll
+D:\Shubham\FinanceCaseStudy\BLL\obj\Debug\BLL.pdb
