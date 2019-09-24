@@ -25,7 +25,7 @@ namespace DAL
                 switch ("System.Data.SqlClient".ToLower())
                 {
                     case "system.data.sqlclient":
-                        database = new SqlDataAccess("Data Source=INFVA05686;Initial Catalog=FinanceCaseStudy;User ID=sa;Password=Newuser123");
+                        database = new SqlDataAccess("Data Source=INFVA05690;Initial Catalog=FinanceCaseStudy;User ID=sa;Password=Newuser123");
                         break;
                     //case "system.data.oracleclient":
                     //    database = new OracleDataAccess(connectionStringSettings.ConnectionString);
@@ -43,7 +43,8 @@ namespace DAL
 
             public string GetProviderName()
             {
-                return connectionStringSettings.ProviderName;
+                //return connectionStringSettings.ProviderName;
+                return "System.Data.SqlClient";
             }
         }
     

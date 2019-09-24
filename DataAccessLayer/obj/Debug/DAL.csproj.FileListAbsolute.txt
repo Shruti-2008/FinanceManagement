@@ -6,3 +6,9 @@ D:\Shubham\FinanceCaseStudy\DataAccessLayer\bin\Debug\BLL.dll
 D:\Shubham\FinanceCaseStudy\DataAccessLayer\bin\Debug\BLL.pdb
 D:\Shubham\FinanceCaseStudy\DataAccessLayer\obj\Debug\DataAccessLayer.dll
 D:\Shubham\FinanceCaseStudy\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\DataAccessLayer\bin\Debug\DataAccessLayer.dll.config
+C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\DataAccessLayer\obj\Debug\DAL.csprojResolveAssemblyReference.cache

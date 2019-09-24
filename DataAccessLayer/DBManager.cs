@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace DAL
 {
@@ -24,10 +25,10 @@ namespace DAL
 
         internal static int ExecuteNonQuery(string CommandName, CommandType cmdType, SqlParameter[] pars)
         {
-            //string  ConnectionString= ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+            string  ConnectionString= ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
             int result = 0;
 
-            using (SqlConnection con = new SqlConnection("Data Source=INFVA05686;Initial Catalog=FinanceCaseStudy;User ID=sa;Password=Newuser123;" ))
+            using (SqlConnection con = new SqlConnection(ConnectionString))
             {
                 using (SqlCommand cmd = con.CreateCommand())
                 {
@@ -258,8 +259,17 @@ namespace DAL
                         }
                     }
 
-                    rowsInserted = command.ExecuteNonQuery();
-                    error = command.Parameters["@error"].ToString();
+                    try
+                    {
+                        rowsInserted = command.ExecuteNonQuery();
+
+                        error = command.Parameters["@error"].ToString();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                       
+                    }
                 }
             }
 

@@ -47,7 +47,7 @@
     <Compile Include="OrderBLL.cs" />
     <Compile Include="ProductBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-<!--<<<<<<< HEAD
+    <!--<<<<<<< HEAD
     <Compile Include="TransactionBLL.cs" />
     <Compile Include="UserBLL.cs" />
   </ItemGroup>
@@ -114,7 +114,13 @@
     <None Include="Scripts\umd\popper.js.map" />
     <None Include="Scripts\umd\popper.min.js.map" />
   </ItemGroup>
-<!-->>>>>>> branch1-->
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccessLayer\DAL.csproj">
+      <Project>{2bc08785-27d5-47eb-85f7-6c1b9d0b583e}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <!-->>>>>>> branch1-->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -101,7 +101,7 @@
                                 <asp:TextBox ID="confirmpassword" runat="server"></asp:TextBox></div>
                         </td>
                         <td>
-                            <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="password" ErrorMessage="CompareValidator" ValidationGroup="v2"></asp:CompareValidator>
+                            <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="confirmpassword" ErrorMessage="CompareValidator" ValidationGroup="v2" ControlToCompare="password"></asp:CompareValidator>
                         </td>
                     </tr>
                     <tr>
@@ -109,7 +109,7 @@
                             <asp:Label ID="Label12" runat="server" Text="Date Of Birth"></asp:Label>
                         </td>
                         <td class="auto-style5">
-                            <asp:Calendar ID="Calendar1" runat="server" ></asp:Calendar>
+                            <asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>
                         </td>
                         <td>
                             <asp:CustomValidator ID="CustomValidator1" runat="server" ClientIDMode="Predictable"  ErrorMessage="Select Date" ValidationGroup="v2"></asp:CustomValidator>
@@ -122,8 +122,8 @@
                         <td class="auto-style5">
                             <div class="input">
                                 <asp:RadioButtonList ID="RadioButtonList1" runat="server" AutoPostBack="True">
-                                    <asp:ListItem>Gold</asp:ListItem>
-                                    <asp:ListItem>Titanium</asp:ListItem>
+                                    <asp:ListItem Value="1">Gold</asp:ListItem>
+                                    <asp:ListItem Value="2">Titanium</asp:ListItem>
                                 </asp:RadioButtonList>
                             </div>
                         </td>
@@ -138,8 +138,8 @@
                         <td class="auto-style5">
                             <div class="input">
                                 <asp:DropDownList ID="selectbank" runat="server" AutoPostBack="True">
-                                    <asp:ListItem>ICICI</asp:ListItem>
-                                    <asp:ListItem>HDFC</asp:ListItem>
+                                    <asp:ListItem Value="1">ICICI</asp:ListItem>
+                                    <asp:ListItem Value="2">HDFC</asp:ListItem>
                                 </asp:DropDownList>
                             </div>
                         </td>
@@ -174,7 +174,7 @@
                     <tr>
                         <td class="auto-style3">&nbsp;</td>
                         <td class="auto-style5">
-                            <asp:Button ID="Button1" runat="server" Text="Register" class="button" ValidationGroup="v2" />
+                            <asp:Button ID="Button1" runat="server" Text="Register" class="button" ValidationGroup="v2" OnClick="Button1_Click" />
 
                         </td>
                         <td>
