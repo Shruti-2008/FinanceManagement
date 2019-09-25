@@ -9,6 +9,7 @@ namespace BLL
 {
     public class UserBLL
     {
+        MyDataAccess SDBA;
         public string UserName { get; set; }
         public string FullName { get; set; }
         public int PhoneNo { get; set; }
@@ -41,14 +42,17 @@ namespace BLL
         }
         public UserBLL()
         {
-
+             SDBA = new MyDataAccess("DBConnection");
         }
 
         public int SaveinDB()
-        {
-            SqlDataAccess SDBA = new SqlDataAccess("DBConnection");
+        {  
             return SDBA.AddUser(this);
-
+        }
+        public bool Login()
+        {
+            SDBA.Login(this);
+            return false;
         }
     }
 }

@@ -19,28 +19,7 @@ namespace DAL
             ConnectionString = connectionString;
         }
 
-        public int AddUser(dynamic u)
-        {
-            
-            var dbManager = new DBManager("DBConnection");
-            var parameters = new List<IDbDataParameter>();
-            string error = "";
-            parameters.Add(dbManager.CreateParameter("@fullname", u.FullName, DbType.String));
-            parameters.Add(dbManager.CreateParameter("@phoneno",u.PhoneNo, DbType.Int32));
-            parameters.Add(dbManager.CreateParameter("@email", u.Email, DbType.String));
-            parameters.Add(dbManager.CreateParameter("@username", u.UserName, DbType.String));
-            parameters.Add(dbManager.CreateParameter("@address", u.Address, DbType.String));
-            parameters.Add(dbManager.CreateParameter("@dateofbirth", u.DateOfBirth, DbType.Date));
-            parameters.Add(dbManager.CreateParameter("@password", u.Password, DbType.String));
-            parameters.Add(dbManager.CreateParameter("@cardtypeid", u.CardTypeID, DbType.Int32));
-            parameters.Add(dbManager.CreateParameter("@bankid", u.BankID, DbType.Int32));
-            parameters.Add(dbManager.CreateParameter("@accountno", u.AccountNo, DbType.Int32));
-            parameters.Add(dbManager.CreateParameter("@ifsccode", u.IFSCCode, DbType.String));
-            parameters.Add(dbManager.CreateParameter("@verified", u.Verified, DbType.Boolean));
-            parameters.Add(dbManager.CreateParameter("@error", ParameterDirection.Output, DbType.Int32)) ;
-            
-            return dbManager.Insert("UserRegistration", CommandType.StoredProcedure, parameters.ToArray(), out error);
-        }
+       
 
 
         public IDbConnection CreateConnection()

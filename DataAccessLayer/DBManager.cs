@@ -47,7 +47,7 @@ namespace DAL
                     }
                     catch (Exception ex)
                     {
-                        //throw;
+                        throw ex;
                     }
 
                 }
@@ -56,51 +56,7 @@ namespace DAL
             return result;
         }
 
-        internal static object ExecuteReader(string commandName, CommandType cmdType, SqlParameter[] parameters)
-        {
-            SqlDataReader dr;
-            object emp = null;
-            using (SqlConnection con = new SqlConnection("Data Source=INFVA05686;Initial Catalog=FinanceCaseStudy;User ID=sa;Password=Newuser123;"))
-            {
-                using (SqlCommand cmd = con.CreateCommand())
-                {
-                    cmd.CommandType = cmdType;
-                    cmd.CommandText = commandName;
-                    cmd.Parameters.AddRange(parameters);
-                    try
-                    {
-                        if (con.State != ConnectionState.Open)
-                        {
-                            con.Open();
-                        }
-                        dr = cmd.ExecuteReader();
-                        if (dr.HasRows)
-                        {
-
-                            while (dr.Read())
-                            {
-                                int eid = dr.GetInt32(0);
-                                string epass = dr.GetString(1);
-                                string efname = dr.GetString(2);
-                                string elname = dr.GetString(3);
-                                int empPerm = dr.GetInt32(4);
-                                int empType = dr.GetInt32(5);
-                                int empSal = dr.GetInt32(6);
-                                
-                            }
-                        }
-
-
-                    }
-                    catch
-                    {
-                        throw;
-                    }
-
-                }
-            }
-            return emp;
-        }
+       
 
         public IDbConnection GetDatabasecOnnection()
         {
@@ -220,8 +176,9 @@ namespace DAL
             }
         }
 
-        public void Insert(string commandText, CommandType commandType, IDbDataParameter[] parameters)
+        public int Insert(string commandText, CommandType commandType, IDbDataParameter[] parameters)
         {
+            int rowsInserted = 0;
             using (var connection = database.CreateConnection())
             {
                 connection.Open();
@@ -236,9 +193,21 @@ namespace DAL
                         }
                     }
 
-                    command.ExecuteNonQuery();
+                    
+                    try
+                    {
+                        rowsInserted = command.ExecuteNonQuery();
+
+                        
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+
+                    }
                 }
             }
+            return rowsInserted;
         }
 
         public int Insert(string commandText, CommandType commandType, IDbDataParameter[] parameters, out string error)
@@ -371,8 +340,9 @@ namespace DAL
             }
         }
 
-        public void Update(string commandText, CommandType commandType, IDbDataParameter[] parameters)
+        public int Update(string commandText, CommandType commandType, IDbDataParameter[] parameters)
         {
+            int rowsUpdated = 0;
             using (var connection = database.CreateConnection())
             {
                 connection.Open();
@@ -387,9 +357,19 @@ namespace DAL
                         }
                     }
 
-                    command.ExecuteNonQuery();
+                    try
+                    {
+                        rowsUpdated = command.ExecuteNonQuery();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+
+                    }
                 }
             }
+            return rowsUpdated;
         }
 
         public void UpdateWithTransaction(string commandText, CommandType commandType, IDbDataParameter[] parameters)

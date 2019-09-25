@@ -20,11 +20,11 @@ namespace PLUserInterface
             if(bh.RegisterFunction
                 (name.Text,Convert.ToInt32( phoneno.Text), email.Text, username.Text, address.Text, password.Text, Calendar1.SelectedDate, Convert.ToInt32(RadioButtonList1.SelectedValue),Convert.ToInt32( selectbank.SelectedValue),Convert.ToInt32( accountno.Text),Convert.ToInt32( ifsccode.Text), false, 1234)>1)
             {
-                Response.Write("Registered");
+                Response.Write("<script>alert('Registered');</script>");
             }
             else
             {
-                Response.Write("ERRor");
+                Response.Write("<script>alert('Error');</script>");
 
             }
         }

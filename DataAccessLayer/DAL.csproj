@@ -45,6 +45,7 @@
     <Compile Include="DataParameterManager.cs" />
     <Compile Include="DBManager.cs" />
     <Compile Include="IDatabaseHandler.cs" />
+    <Compile Include="MyDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlDataAccess.cs" />
   </ItemGroup>
