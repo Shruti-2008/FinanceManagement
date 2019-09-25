@@ -60,12 +60,24 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminPage.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="images1\c1.jpg" />
+    <Content Include="images1\c1new.jpg" />
+    <Content Include="images1\c2.jpg" />
+    <Content Include="images1\c3.jpg" />
+    <Content Include="images1\d1.jpg" />
+    <Content Include="images1\d2.jpg" />
+    <Content Include="images1\d3.jpg" />
+    <Content Include="images1\d4.jpg" />
+    <Content Include="images1\d5.jpg" />
+    <Content Include="images1\d6.jpg" />
+    <Content Include="ProductInfo.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -134,6 +146,13 @@
     <Content Include="Local.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminPage.aspx.cs">
+      <DependentUpon>AdminPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPage.aspx.designer.cs">
+      <DependentUpon>AdminPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AuthUser.Master.cs">
       <DependentUpon>AuthUser.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -157,6 +176,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProductInfo.aspx.cs">
+      <DependentUpon>ProductInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductInfo.aspx.designer.cs">
+      <DependentUpon>ProductInfo.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProductList.aspx.cs">
       <DependentUpon>ProductList.aspx</DependentUpon>
