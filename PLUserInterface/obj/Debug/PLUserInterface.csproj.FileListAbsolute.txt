@@ -18,3 +18,14 @@ C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\PLUserInterface\bin\DataAccessLayer.
 C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\PLUserInterface\obj\Debug\PLUserInterface.csprojResolveAssemblyReference.cache
 C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\PLUserInterface\obj\Debug\PLUserInterface.dll
 C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\PLUserInterface\obj\Debug\PLUserInterface.pdb
+C:\Users\AW204_PC5\Desktop\Shubham\PLUserInterface\bin\PLUserInterface.dll.config
+C:\Users\AW204_PC5\Desktop\Shubham\PLUserInterface\bin\PLUserInterface.dll
+C:\Users\AW204_PC5\Desktop\Shubham\PLUserInterface\bin\PLUserInterface.pdb
+C:\Users\AW204_PC5\Desktop\Shubham\PLUserInterface\bin\AjaxControlToolkit.dll
+C:\Users\AW204_PC5\Desktop\Shubham\PLUserInterface\bin\BLL.dll
+C:\Users\AW204_PC5\Desktop\Shubham\PLUserInterface\bin\DataAccessLayer.dll
+C:\Users\AW204_PC5\Desktop\Shubham\PLUserInterface\bin\BLL.pdb
+C:\Users\AW204_PC5\Desktop\Shubham\PLUserInterface\bin\DataAccessLayer.pdb
+C:\Users\AW204_PC5\Desktop\Shubham\PLUserInterface\obj\Debug\PLUserInterface.csprojResolveAssemblyReference.cache
+C:\Users\AW204_PC5\Desktop\Shubham\PLUserInterface\obj\Debug\PLUserInterface.dll
+C:\Users\AW204_PC5\Desktop\Shubham\PLUserInterface\obj\Debug\PLUserInterface.pdb
