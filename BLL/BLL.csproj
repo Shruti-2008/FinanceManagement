@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="BankBLL.cs" />
     <Compile Include="BussinessHandler.cs" />
+    <Compile Include="Card.cs" />
     <Compile Include="CardType.cs" />
     <Compile Include="CategoryBLL.cs" />
     <Compile Include="IRepo.cs" />
@@ -87,6 +88,7 @@
     <Content Include="Scripts\umd\popper.min.js" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="Content\bootstrap-grid.css.map" />
     <None Include="Content\bootstrap-grid.min.css.map" />
     <None Include="Content\bootstrap-reboot.css.map" />

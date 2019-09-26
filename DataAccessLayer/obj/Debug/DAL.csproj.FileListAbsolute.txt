@@ -11,3 +11,4 @@ C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\DataAccessLayer\bin\Debug\DataAccess
 C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
 C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\DataAccessLayer\obj\Debug\DataAccessLayer.dll
 C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\DataAccessLayer\obj\Debug\DAL.csprojResolveAssemblyReference.cache

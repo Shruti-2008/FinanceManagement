@@ -1,9 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AuthUser.Master" AutoEventWireup="true" CodeBehind="ProductList.aspx.cs" Inherits="PLUserInterface.ProductList" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    
     <style>
         table {
             width: -webkit-fill-available;
         }
+
         .login-page {
             width: 360px;
             padding: 8% 0 0;
@@ -53,13 +56,12 @@
                 background: #43A047;
             }
 
-            .img
-            {
-                max-height:100%;
-                height:100%;
-            }
+        .img {
+            max-height: 100%;
+            height: 100%;
+        }
 
-            
+
 
         body {
             background: #76b852; /* fallback for old browsers */
@@ -77,10 +79,15 @@
     <%--<asp:ListView ID="ListView1" runat="server" DataSourceID="ObjectDataSource1"></asp:ListView>--%>
     <%--<asp:GridView ID="GridView1" runat="server" DataSourceID="ObjectDataSource1"></asp:GridView>--%>
 
-    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="Select" TypeName="BLL.ProductBLL"></asp:ObjectDataSource>
+    <%-- <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="Select" TypeName="BLL.ProductBLL"></asp:ObjectDataSource>--%>
 
 
-    <asp:ListView ID="ListView1" runat="server" DataSourceID="ObjectDataSource1">
+    <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" AutoPostBack="True">
+    </asp:DropDownList>
+
+    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+    <asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
+    <asp:ListView ID="ListView1" runat="server" OnSelectedIndexChanged="ListView1_SelectedIndexChanged" AutoPostBack="True" OnSelectedIndexChanging="ListView1_SelectedIndexChanging1">
 
 
 
@@ -90,29 +97,43 @@
                 <table style="border-collapse: separate; border-spacing: 5px;">
 
 
-                    <tr>
-                        <td rowspan="4">
+                    <tr class="col-sm-12">
+                        <div class="col-sm-3">
+                            <td>
+                                <div class="input col-sm-3">
+                                    <asp:Image ImageUrl='<%#"data:Image/jpg;base64,"+Convert.ToBase64String((byte[])Eval("productimage"))%>' runat="server" Width="200px" Height="200px" />
+                                </div>
 
-                            <asp:Image ID="Image2" runat="server" ImageUrl='<%# Eval("image")%>' Height="100%" />
 
-                        </td>
+                            </td>
+                        </div>
 
+                        <div class="col-sm-9">
+                            <td>
+                                <div class="input">
+                                    <h6 class="group inner list-group-item-heading"><u>Product Name</u></h6>
+                                    <asp:Label ID="Label2" runat="server" Text='<%# Eval("productname")%>'> 
+                                    </asp:Label>
+                                </div>
 
-                        <td>
-                            <div class="input">
-                                <h6 class="group inner list-group-item-heading"><u>Product Name</u></h6>
-                                <asp:Label ID="Label2" runat="server" Text='<%# Eval("name")%>'> 
-                                </asp:Label>
-                            </div>
-
-                        </td>
+                            </td>
                     </tr>
 
                     <tr>
                         <td>
-                            <div class="input">
+                            <div class="input ">
                                 <h6 class="group inner list-group-item-heading"><u>Product Details</u></h6>
-                                <asp:Label ID="Label3" runat="server" Text='<%# Eval("details")%>'> 
+                                <asp:Label ID="Label3" runat="server" Text='<%# Eval("quantity")%>'> 
+                                </asp:Label>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="input ">
+                                <h6 class="group inner list-group-item-heading"><u>Product Details</u></h6>
+                                <asp:Label ID="Label4" runat="server" Text='<%# Eval("price")%>'> 
                                 </asp:Label>
                             </div>
 
@@ -122,19 +143,22 @@
 
                     <tr>
                         <td>
-                            <asp:Button ID="Button1" runat="server" Text="Buy Now" class="button"/>
+                            <asp:LinkButton ID="Button1" runat="server" Text="Buy Now" CssClass="button" Enabled='<%# Eval("Disable").ToString() == "0" ? true : false %>' OnClick="Button1_Click1" CommandName="Select" />
 
 
                         </td>
-                    </tr>
-
+            </div>
+            </tr>
+            
 
                 </table>
+
             </div>
         </ItemTemplate>
 
     </asp:ListView>
 
-    
-    
+
+
+
 </asp:Content>

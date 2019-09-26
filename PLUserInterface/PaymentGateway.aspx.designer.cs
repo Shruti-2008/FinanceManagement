@@ -10,78 +10,87 @@
 namespace PLUserInterface {
     
     
-    public partial class Dashboard {
+    public partial class PaymentGateway {
         
         /// <summary>
-        /// DetailsView1 control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DetailsView DetailsView1;
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// DetailsView2 control.
+        /// ccnum control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DetailsView DetailsView2;
+        protected global::System.Web.UI.WebControls.TextBox ccnum;
         
         /// <summary>
-        /// OrderHistory_gridview control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView OrderHistory_gridview;
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// pnlPopup control.
+        /// expmonth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlPopup;
+        protected global::System.Web.UI.WebControls.TextBox expmonth;
         
         /// <summary>
-        /// OrderSpecific_gridview control.
+        /// Label3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView OrderSpecific_gridview;
+        protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
-        /// lblorderid control.
+        /// expyear control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblorderid;
+        protected global::System.Web.UI.WebControls.TextBox expyear;
         
         /// <summary>
-        /// btnClose control.
+        /// Label4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnClose;
+        protected global::System.Web.UI.WebControls.Label Label4;
         
         /// <summary>
-        /// ActiveEMI_gridview control.
+        /// cvv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView ActiveEMI_gridview;
+        protected global::System.Web.UI.WebControls.TextBox cvv;
+        
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
     }
 }

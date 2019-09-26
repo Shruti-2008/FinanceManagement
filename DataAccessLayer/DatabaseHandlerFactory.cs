@@ -15,17 +15,17 @@ namespace DAL
 
             public DatabaseHandlerFactory(string connectionStringName)
             {
-                connectionStringSettings = ConfigurationManager.ConnectionStrings[connectionStringName];
+                connectionStringSettings =  ConfigurationManager.ConnectionStrings[connectionStringName];
             }
 
             public IDatabaseHandler CreateDatabase()
             {
                 IDatabaseHandler database = null;
 
-                switch ("System.Data.SqlClient".ToLower())
+                switch (connectionStringSettings.ProviderName.ToLower())
                 {
                     case "system.data.sqlclient":
-                        database = new SqlDataAccess("Data Source=INFVA05690;Initial Catalog=FinanceCaseStudy;User ID=sa;Password=Newuser123");
+                        database = new SqlDataAccess(connectionStringSettings.ConnectionString);
                         break;
                     //case "system.data.oracleclient":
                     //    database = new OracleDataAccess(connectionStringSettings.ConnectionString);
@@ -43,8 +43,8 @@ namespace DAL
 
             public string GetProviderName()
             {
-                //return connectionStringSettings.ProviderName;
-                return "System.Data.SqlClient";
+                return connectionStringSettings.ProviderName;
+                //return "System.Data.SqlClient";
             }
         }
     

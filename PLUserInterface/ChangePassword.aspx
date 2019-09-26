@@ -1,7 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Local.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="PLUserInterface.Login" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AuthUser.Master" AutoEventWireup="true" CodeBehind="ChangePassword.aspx.cs" Inherits="PLUserInterface.ChangePassword" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <style>
         @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
@@ -15,7 +14,7 @@
             position: relative;
             z-index: 1;
             background: #FFFFFF;
-            /*max-width: 400px;*/
+            max-width: 400px;
             margin: 0 auto 100px;
             padding: 45px;
             text-align: center;
@@ -35,13 +34,12 @@
         }
 
         .button {
-            border-style: none;
-            border-color: inherit;
-            border-width: 0;
             font-family: "Roboto", sans-serif;
             text-transform: uppercase;
             outline: 0;
             background: #4CAF50;
+            width: 100%;
+            border: 0;
             padding: 15px;
             color: #FFFFFF;
             font-size: 14px;
@@ -123,27 +121,33 @@
         }
     </style>
 </asp:Content>
-
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-
-    <div class="login-page">
-        <div class="form">
-            <asp:Label ID="Label1" runat="server" Text="Username"></asp:Label>
-            <div class="input">
-                <asp:TextBox ID="username" runat="server"></asp:TextBox>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div>
+        <div class="login-page">
+            <div class="form">
+                <asp:Label ID="Label1" runat="server" Text="Old Password"></asp:Label>
+                <div class="input">
+                    <asp:TextBox ID="oldpassword" runat="server"></asp:TextBox>
+                </div>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please Enter Password" ControlToValidate="oldpassword"></asp:RequiredFieldValidator>
+                <br />
+                <asp:Label ID="Label3" runat="server" Text="New Password"></asp:Label>
+                <div class="input">
+                    <asp:TextBox ID="newpassword" runat="server"></asp:TextBox>
+                </div>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Please Enter Password" ControlToValidate="newpassword"></asp:RequiredFieldValidator>
+                <br />
+                <asp:Label ID="Label2" runat="server" Text="Confirm Password"></asp:Label>
+                <div class="input">
+                    <asp:TextBox ID="confirmpassword" runat="server"></asp:TextBox>
+                </div>
+                <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="The Password does not match" ControlToValidate="confirmpassword"></asp:CompareValidator>
+                <br />
+                <br />
+                <br />
+                <asp:Button ID="Button1" runat="server" Text="Save" class="button" />
+                <br />
             </div>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="username" ErrorMessage="Please enter the username"></asp:RequiredFieldValidator>
-            <br />
-
-            <asp:Label ID="Label2" runat="server" Text="Password"></asp:Label>
-            <div class="input">
-                <asp:TextBox ID="password" runat="server"></asp:TextBox>
-            </div>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="password" ErrorMessage="Please enter the password"></asp:RequiredFieldValidator>
-
-
-            <asp:Button ID="Button1" runat="server" class="button" Text="Login" OnClick="Login_Click" />
-            <p class="message">Not registered?<a href="Register.aspx">Create an account</a></p>
         </div>
     </div>
 </asp:Content>

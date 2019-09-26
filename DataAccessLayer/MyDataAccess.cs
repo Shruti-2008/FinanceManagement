@@ -14,28 +14,29 @@ namespace DAL
         List<IDbDataParameter> parameters;
         public MyDataAccess(string ConnName)
         {
-            dbManager = new DBManager(ConnName.ToString());
-            parameters = new List<IDbDataParameter>();
+            dbManager = new DBManager(ConnName);
+           
         }
-        public IDataReader CheckUsername(dynamic username)
-        {
-            IDbConnection connection = null;
+        public DataTable CheckUsername(dynamic username)
+        {    
+            parameters = new List<IDbDataParameter>();
             parameters.Add(dbManager.CreateParameter("@uname", username, DbType.String));
-            return dbManager.GetDataReader("UserNameExists", CommandType.StoredProcedure, parameters.ToArray(), out connection);
+            return dbManager.GetDataTable("UserNameExists", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public int AdminUserVerification(dynamic u)
+        public int AdminUserVerification(string uname, int verified)
         {
-            parameters.Add(dbManager.CreateParameter("@uname", u.UserName, DbType.String));
-            parameters.Add(dbManager.CreateParameter("@checked", u.Verified, DbType.String));
+            parameters = new List<IDbDataParameter>();
+            parameters.Add(dbManager.CreateParameter("@uname", uname, DbType.String));
+            parameters.Add(dbManager.CreateParameter("@checked", verified, DbType.String));
             parameters.Add(dbManager.CreateParameter("@error", ParameterDirection.Output, DbType.String));
             return dbManager.Update("AdminUserVerification", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-
         public int AddUser(dynamic u)
         {
             string error = "";
+            parameters = new List<IDbDataParameter>();
             parameters.Add(dbManager.CreateParameter("@fullname", u.FullName, DbType.String));
             parameters.Add(dbManager.CreateParameter("@phoneno", u.PhoneNo, DbType.Int32));
             parameters.Add(dbManager.CreateParameter("@email", u.Email, DbType.String));
@@ -53,48 +54,58 @@ namespace DAL
             return dbManager.Insert("UserRegistration", CommandType.StoredProcedure, parameters.ToArray(), out error);
         }
 
-        public IDataReader UserCardInfo(dynamic u)
+        public DataSet GetUsers()
         {
-            IDbConnection connection = null;
-            parameters.Add(dbManager.CreateParameter("@username", u.UserName, DbType.String));
-            return dbManager.GetDataReader("GetCardInfo", CommandType.StoredProcedure, parameters.ToArray(), out connection);
+            parameters = new List<IDbDataParameter>();
+            return dbManager.GetDataSet("GetAllUsers", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public IDataReader UserEmiHistory(dynamic u)
+        public DataTable UserCardInfo(string u)
         {
-            IDbConnection connection = null;
-            parameters.Add(dbManager.CreateParameter("@uname", u.UserName, DbType.String));
-            return dbManager.GetDataReader("GetEMIHistory", CommandType.StoredProcedure, parameters.ToArray(), out connection);
+            parameters = new List<IDbDataParameter>();
+            parameters.Add(dbManager.CreateParameter("@username", u, DbType.String));
+            return dbManager.GetDataTable("GetEMICardInfo", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public DataSet OrderHistory(dynamic u)
+
+        public DataTable UserEmiHistory(string u)
         {
-            parameters.Add(dbManager.CreateParameter("@username", u.UserName, DbType.String));
-            return dbManager.GetDataSet("GetOrderHistory", CommandType.StoredProcedure, parameters.ToArray());
+            parameters = new List<IDbDataParameter>();
+            parameters.Add(dbManager.CreateParameter("@uname", u, DbType.String));
+            return dbManager.GetDataTable("GetEMIHistory", CommandType.StoredProcedure, parameters.ToArray());
+        }
+
+        public DataTable OrderHistory(string u)
+        {
+            parameters = new List<IDbDataParameter>();
+            parameters.Add(dbManager.CreateParameter("@username", u, DbType.String));
+            return dbManager.GetDataTable("GetOrderHistory", CommandType.StoredProcedure, parameters.ToArray());
         }
 
         public DataSet ProductCart(dynamic u, dynamic c)
         {
+            parameters = new List<IDbDataParameter>();
             parameters.Add(dbManager.CreateParameter("@username", u.UserName, DbType.String));
             parameters.Add(dbManager.CreateParameter("@categoryid", c.CategoryID, DbType.String));
             return dbManager.GetDataSet("GetAllProducts", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public IDataReader CategoryList()
+        public DataSet CategoryList()
         {
-            IDbConnection connection = null;
-            return dbManager.GetDataReader("GetAllCategories", CommandType.StoredProcedure, parameters.ToArray(), out connection);
+            parameters = new List<IDbDataParameter>();
+            return dbManager.GetDataSet("GetAllCategories", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public IDataReader ProductInfo(dynamic p)
+        public DataSet ProductInfo(int productid)
         {
-            IDbConnection connection = null;
-            parameters.Add(dbManager.CreateParameter("@productid", p.ProductId, DbType.Int32));
-            return dbManager.GetDataReader("GetProductInfoById", CommandType.StoredProcedure, parameters.ToArray(), out connection);
+            parameters = new List<IDbDataParameter>();
+            parameters.Add(dbManager.CreateParameter("@productid", productid, DbType.Int32));
+            return dbManager.GetDataSet("GetProductInfoById", CommandType.StoredProcedure, parameters.ToArray());
         }
 
         public int PlaceOrder(dynamic username, dynamic productid, dynamic schemeid)
         {
+            parameters = new List<IDbDataParameter>();
             parameters.Add(dbManager.CreateParameter("@uname", username, DbType.String));
             parameters.Add(dbManager.CreateParameter("@productid", productid, DbType.Int32));
             parameters.Add(dbManager.CreateParameter("@schemeid", schemeid, DbType.Int32));
@@ -104,17 +115,17 @@ namespace DAL
 
         public int Payment(dynamic orderid)
         {
+            parameters = new List<IDbDataParameter>();
             parameters.Add(dbManager.CreateParameter("@orderID", orderid, DbType.Int32));
             return dbManager.Insert("PayInstallment", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-
-        public IDataReader Login(dynamic u)
+        public DataTable Login(dynamic u)
         {
-            IDbConnection connection = null;
-            parameters.Add(dbManager.CreateParameter("@uname", u.UserName, DbType.Int32));
-            parameters.Add(dbManager.CreateParameter("@pwd", u.Password, DbType.Int32));
-            return dbManager.GetDataReader("SignIn", CommandType.StoredProcedure, parameters.ToArray(), out connection);
+            parameters = new List<IDbDataParameter>();
+            parameters.Add(dbManager.CreateParameter("@uname", u.UserName, DbType.String));
+            parameters.Add(dbManager.CreateParameter("@pwd", u.Password, DbType.String));
+            return dbManager.GetDataTable("SignIn", CommandType.StoredProcedure, parameters.ToArray());
         }
     }
 }

@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL;
+using System.Data;
 
 namespace BLL
 {
     public class UserBLL
     {
-        MyDataAccess SDBA;
+        static MyDataAccess SDBA;
         public string UserName { get; set; }
         public string FullName { get; set; }
         public int PhoneNo { get; set; }
@@ -40,19 +41,57 @@ namespace BLL
             this.CardTypeID = CardTypeID;
 
         }
-        public UserBLL()
+        static UserBLL()
         {
-             SDBA = new MyDataAccess("DBConnection");
+            SDBA = new MyDataAccess("DBConnection");
         }
 
-        public int SaveinDB()
-        {  
+        public UserBLL(string UserName, string Password)
+        {
+            this.UserName = UserName;
+            this.Password = Password;
+
+        }
+
+        public UserBLL()
+        {
+            // TODO: Complete member initialization
+        }
+        internal int SaveinDB()
+        {
             return SDBA.AddUser(this);
         }
-        public bool Login()
+
+        internal bool ValidateFromDB()
         {
-            SDBA.Login(this);
-            return false;
+            if (SDBA.Login(this).Rows.Count > 0)
+                return true;
+            else
+                return false;
+        }
+
+        internal DataTable GetUserFromDB()
+        {
+            return SDBA.Login(this);
+        }
+
+        internal bool checkfromDB(string p)
+        {
+            
+            if (SDBA.CheckUsername(p).Rows.Count > 0)
+                return true;
+            else
+                return false;
+        }
+
+        internal DataSet GetUser()
+        {
+            return SDBA.GetUsers();
+        }
+
+        internal int Verify(string uname, int n)
+        {
+            return SDBA.AdminUserVerification(uname, n);
         }
     }
 }

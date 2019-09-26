@@ -16,9 +16,10 @@ namespace PLUserInterface
         {
             
             Session.Add("Username",null);
-            Session.Add("ID", null);
-            Session.Add("Verified", false);
-            Session.Add("Validated", false);
+            Session.Add("ID", new Random().Next(100000,100000));
+            Session.Add("Verified", null);
+            Session.Add("Validated", null);
+            Session.Add("CardTypeid",null);
             
         }
         

@@ -95,6 +95,7 @@ namespace DAL
                 {
                     if (parameters != null)
                     {
+                        
                         foreach (var parameter in parameters)
                         {
                             command.Parameters.Add(parameter);
@@ -103,8 +104,11 @@ namespace DAL
 
                     var dataset = new DataSet();
                     var dataAdaper = database.CreateAdapter(command);
+                    
                     dataAdaper.Fill(dataset);
 
+                    command.Parameters.Clear();
+                    //parameters.
                     return dataset.Tables[0];
                 }
             }
@@ -137,6 +141,7 @@ namespace DAL
 
         public IDataReader GetDataReader(string commandText, CommandType commandType, IDbDataParameter[] parameters, out IDbConnection connection)
         {
+            
             IDataReader reader = null;
             connection = database.CreateConnection();
             connection.Open();

@@ -17,15 +17,31 @@ namespace PLUserInterface
         protected void Button1_Click(object sender, EventArgs e)
         {
             BussinessHandler bh = new BussinessHandler();
+           
             if(bh.RegisterFunction
                 (name.Text,Convert.ToInt32( phoneno.Text), email.Text, username.Text, address.Text, password.Text, Calendar1.SelectedDate, Convert.ToInt32(RadioButtonList1.SelectedValue),Convert.ToInt32( selectbank.SelectedValue),Convert.ToInt32( accountno.Text),Convert.ToInt32( ifsccode.Text), false, 1234)>1)
             {
+                Session["Username"] = username.Text;
                 Response.Write("<script>alert('Registered');</script>");
+                Response.Redirect("ProductList.aspx");
             }
             else
             {
                 Response.Write("<script>alert('Error');</script>");
 
+            }
+        }
+
+        protected void CheckUserNameAvailability(object sender, EventArgs e)
+        {
+            BussinessHandler bh = new BussinessHandler();
+            if(bh.UserExists(username.Text))
+            {
+                UpdateMsg.Text = "Exists";
+            }
+            else
+            {
+                UpdateMsg.Text = "No exists";
             }
         }
     }
