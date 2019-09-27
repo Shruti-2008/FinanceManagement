@@ -81,8 +81,7 @@
 
     <%-- <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="Select" TypeName="BLL.ProductBLL"></asp:ObjectDataSource>--%>
 
-
-    <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" AutoPostBack="True">
+     <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" AutoPostBack="True">
     </asp:DropDownList>
 
     <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
@@ -112,7 +111,7 @@
                             <td>
                                 <div class="input">
                                     <h6 class="group inner list-group-item-heading"><u>Product Name</u></h6>
-                                    <asp:Label ID="Label2" runat="server" Text='<%# Eval("productname")%>'> 
+                                    <asp:Label ID="Label2" runat="server" Text='<%# Eval("productname")%>'>
                                     </asp:Label>
                                 </div>
 
@@ -123,7 +122,7 @@
                         <td>
                             <div class="input ">
                                 <h6 class="group inner list-group-item-heading"><u>Product Details</u></h6>
-                                <asp:Label ID="Label3" runat="server" Text='<%# Eval("quantity")%>'> 
+                                <asp:Label ID="Label3" runat="server" Text='<%# Eval("quantity")%>'>
                                 </asp:Label>
                             </div>
 
@@ -133,7 +132,7 @@
                         <td>
                             <div class="input ">
                                 <h6 class="group inner list-group-item-heading"><u>Product Details</u></h6>
-                                <asp:Label ID="Label4" runat="server" Text='<%# Eval("price")%>'> 
+                                <asp:Label ID="Label4" runat="server" Text='<%# Eval("price")%>'>
                                 </asp:Label>
                             </div>
 
@@ -143,13 +142,13 @@
 
                     <tr>
                         <td>
-                            <asp:LinkButton ID="Button1" runat="server" Text="Buy Now" CssClass="button" Enabled='<%# Eval("Disable").ToString() == "0" ? true : false %>' OnClick="Button1_Click1" CommandName="Select" />
+                            <asp:LinkButton ID="Button1" runat="server" Text="Buy Now" CssClass="button" Enabled='<%# Eval("Disable").ToString() == "0" && Convert.ToInt32(Eval("quantity"))>0 ? true : false %>' OnClick="Button1_Click1" CommandName="Select" />
 
 
                         </td>
             </div>
             </tr>
-            
+           
 
                 </table>
 
@@ -157,8 +156,6 @@
         </ItemTemplate>
 
     </asp:ListView>
-
-
 
 
 </asp:Content>

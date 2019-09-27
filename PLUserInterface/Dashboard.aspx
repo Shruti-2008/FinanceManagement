@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AuthUser.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="PLUserInterface.Dashboard" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AuthUser.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="PLUserInterface.Dashboard" EnableEventValidation="false"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <meta charset="utf-8" />
@@ -130,13 +130,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
-
-        <%--EMI Card --%>
+        <a href="ProductList.aspx">ProductList</a>
+        <%--ORDER HISTORY--%>
         <div class="row">
             <div class="col-lg-12">
                 <div class="form">
                     <div class="cities">
-                        <asp:DetailsView ID="DetailsView1" runat="server" AutoGenerateRows="False" GridLines="None">
+                        <asp:DetailsView ID="DetailsView1" runat="server" AutoGenerateRows="False" GridLines="None" >
 
                             <Fields>
 
@@ -157,14 +157,13 @@
         <div class="cities1">
             <div class="form">
 
-                <%--Credit Info--%>
+                <%--OnRowCommand="OrderHistory_gridview_RowCommand"--%>
                 <div class="row">
                     <div class="input1">
                         <div class="progress">
-                            <div id="progressbar1" class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
-                                <span class="sr-only">30</span>
-                            </div>
-                        </div>
+                                <!-- Define a Panel that you can use to set these values -->
+                                    <asp:Panel ID="YourPercentagePanel" runat="server" CssClass="progress-bar" OnLoad="ShowProgressBar"></asp:Panel>
+                             </div>
                         <asp:DetailsView ID="DetailsView2" runat="server" Height="50px" Width="125px" AutoGenerateRows="False" GridLines="None">
                             <Fields>
                                 <asp:BoundField DataField="creditlimit" HeaderText="TotalCredit :" />
@@ -176,12 +175,13 @@
                 </div>
 
 
-                <%--ORDER HISTORY--%>
+                <%--OnRowCommand="OrderHistory_gridview_RowCommand"--%>
                 <div class="row">
 
                     <div class="input1">
                         <table style="border-collapse: separate; border-spacing: 5px;">
-                            <asp:GridView ID="OrderHistory_gridview" runat="server" AutoGenerateColumns="false" OnRowCommand="OrderHistory_gridview_RowCommand">
+                            <asp:GridView ID="OrderHistory_gridview" runat="server" AutoGenerateColumns="false" AutoPostBack="True">
+                                <%--OnRowCommand="OrderHistory_gridview_RowCommand"--%>
                                 <Columns>
                                     <asp:BoundField DataField="orderid" HeaderText="Order Number" />
                                     <asp:BoundField DataField="orderdate" HeaderText="Order Date" />
@@ -200,8 +200,8 @@
 
                                 </Columns>
                             </asp:GridView>
-                            <div>
-                            </div>
+
+
                             <asp:Panel ID="pnlPopup" runat="server" CssClass="modalPopup" AutoPostBack="true">
                                 <%--Style="display: none"--%>
                                 <div class="header bg-danger">
@@ -222,10 +222,12 @@
                 </div>
 
 
-                <%--Active EMI--%>
+                <%--OnClientClick="return ShowPanel(this)"--%>
                 <div class="row">
                     <div class="input1">
-                        <asp:GridView ID="ActiveEMI_gridview" runat="server" AutoGenerateColumns="False" OnRowDataBound="ActiveEMI_gridview_RowDataBound" OnRowCreated="ActiveEMI_gridview_RowCreated">
+                        <table style="border-collapse: separate; border-spacing: 5px;">
+                        <asp:GridView ID="ActiveEMI_gridview" runat="server" AutoGenerateColumns="False" OnRowDataBound="ActiveEMI_gridview_RowDataBound" AutoPostBack="True">
+                            <%--OnRowDataBound="ActiveEMI_gridview_RowDataBound" OnRowCreated="ActiveEMI_gridview_RowCreated"--%>
                             <Columns>
                                 <asp:BoundField DataField="orderid" HeaderText="Order Number" />
                                 <asp:BoundField DataField="productname" HeaderText="Product Name" />
@@ -241,8 +243,11 @@
 
                             </Columns>
                         </asp:GridView>
+                        </table>
                     </div>
                 </div>
+
+                <asp:Button ID="Saveaspdf" runat="server" OnClick="Saveaspdf_Click" Text="Save As PDF" />
 
             </div>
         </div>

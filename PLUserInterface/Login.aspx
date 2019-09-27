@@ -2,6 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    
     <style>
         @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
@@ -140,7 +141,7 @@
                 <asp:TextBox ID="password" runat="server"></asp:TextBox>
             </div>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="password" ErrorMessage="Please enter the password"></asp:RequiredFieldValidator>
-
+            <p class="message">Forgot Password?<a href="ForgotPassword.aspx">Click here to Recover</a></p>
 
             <asp:Button ID="Button1" runat="server" class="button" Text="Login" OnClick="Login_Click" />
             <p class="message">Not registered?<a href="Register.aspx">Create an account</a></p>

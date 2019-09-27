@@ -10,13 +10,14 @@
     <script src="Scripts/jquery-3.4.1.min.js"></script>
     <script src="Scripts/popper.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
+    
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Image AlternateText="Logo here" ImageUrl="App_Data/App_Images/Logo.png" ID="Image1" runat="server" />
+           
             <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
                 <asp:HyperLink ID="HyperLink1" runat="server" class="navbar-brand" NavigateUrl="#">

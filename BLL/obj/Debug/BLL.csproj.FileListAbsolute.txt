@@ -9,6 +9,7 @@ C:\Users\AW204_PC5\Desktop\Shubham\BLL\bin\Debug\DataAccessLayer.pdb
 C:\Users\AW204_PC5\Desktop\Shubham\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
 C:\Users\AW204_PC5\Desktop\Shubham\BLL\obj\Debug\BLL.dll
 C:\Users\AW204_PC5\Desktop\Shubham\BLL\obj\Debug\BLL.pdb
+C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\BLL\bin\Debug\BLL.dll.config
 C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\BLL\bin\Debug\BLL.dll
 C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\BLL\bin\Debug\BLL.pdb
 C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\BLL\bin\Debug\DataAccessLayer.dll
@@ -16,4 +17,3 @@ C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\BLL\bin\Debug\DataAccessLayer.pdb
 C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
 C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\BLL\obj\Debug\BLL.dll
 C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\BLL\obj\Debug\BLL.pdb
-C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\BLL\bin\Debug\BLL.dll.config

@@ -18,93 +18,242 @@ namespace BLL
         {
         }
 
-        public int RegisterFunction(string FullName, int PhoneNo, string Email, string UserName, string Address, string Password, DateTime DateOfBirth, int CardTypeID, int BankID, int AccountNo, int IFSCCode, bool Verified, int CardNumber)
+        public int RegisterFunction(string FullName, Int64 PhoneNo, string Email, string UserName, string Address, string Password, DateTime DateOfBirth, int CardTypeID, int BankID, int AccountNo, int IFSCCode, bool Verified, int CardNumber)
         {
-            DBA = new UserBLL(FullName, PhoneNo, Email, UserName, Address, Password, DateOfBirth, CardTypeID, BankID, AccountNo, IFSCCode, Verified, CardNumber);
-            return DBA.SaveinDB();
+            try
+            {
+                DBA = new UserBLL(FullName, PhoneNo, Email, UserName, Address, Password, DateOfBirth, CardTypeID, BankID, AccountNo, IFSCCode, Verified, CardNumber);
+                return DBA.SaveinDB();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         public DataTable Authorize(string UserName, string Password)
         {
-            if (UserName == "admin" && Password == "admin")
+            try
             {
-                return new System.Data.DataTable("admin");
-            }
-            else
-            {
-                DBA = new UserBLL(UserName, Password);
-                if (DBA.ValidateFromDB())
+                if (UserName == "admin" && Password == "admin")
                 {
-                    return DBA.GetUserFromDB();
+                    return new System.Data.DataTable("admin");
                 }
                 else
                 {
-                    return null;
+                    DBA = new UserBLL(UserName, Password);
+                    if (DBA.ValidateFromDB())
+                    {
+                        return DBA.GetUserFromDB();
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                
+                throw;
             }
         }
 
         public bool UserExists(string p)
         {
-            DBA = new UserBLL();
-            return DBA.checkfromDB(p);
+            try
+            {
+                DBA = new UserBLL();
+                return DBA.checkfromDB(p);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         public DataSet GetUserFunction()
         {
-            DBA = new UserBLL();
-            return DBA.GetUser();
+            try
+            {
+                DBA = new UserBLL();
+                return DBA.GetUser();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
-        public int VerifyFunction(string uname, int n)
+        public int VerifyFunction(string uname, int check)
         {
-            DBA = new UserBLL();
-            return DBA.Verify(uname, n);
+            try
+            {
+                DBA = new UserBLL();
+                return DBA.Verify(uname, check);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         public DataSet GetProductsToCart(string username, int categoryid)
         {
-            p = new ProductBLL();
-            //    int categoryn = Convert.ToInt32(categoryid);
-            DataSet ds = p.ProductCart(username, categoryid);
-            return ds;
+            try
+            {
+                p = new ProductBLL();
+                //    int categoryn = Convert.ToInt32(categoryid);
+                DataSet ds = p.ProductCart(username, categoryid);
+                return ds;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
+
         public DataSet GetCategories()
         {
-            cb = new CategoryBLL();
-            DataSet ds = cb.GetAllCategories();
-            return ds;
+            try
+            {
+                cb = new CategoryBLL();
+                DataSet ds = cb.GetAllCategories();
+                return ds;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         public DataSet GetProductInfo(int productid)
         {
-            p = new ProductBLL();
-            DataSet ds = p.ProductInfo(productid);
-            return ds;
+            try
+            {
+                p = new ProductBLL();
+                DataSet ds = p.ProductInfo(productid);
+                return ds;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         public DataTable GetCardInfo(string username)
         {
-            Card card = new Card();
-            return card.GetCardInfo_BLL(username);
+            try
+            {
+                Card card = new Card();
+                return card.GetCardInfo_BLL(username);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         public DataTable GetOrderHistory(string username)
         {
-            order = new OrderBLL();
-            return order.GetOrderHistory_BLL(username);
+            try
+            {
+                order = new OrderBLL();
+                return order.GetOrderHistory_BLL(username);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         public DataTable GetAllEMIHistory(string username)
         {
-            transaction = new TransactionBLL();
-            return transaction.GetAllEMIHistory_BLL(username);
+            try
+            {
+                transaction = new TransactionBLL();
+                return transaction.GetAllEMIHistory_BLL(username);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         public int PayInstallment(int orderid)
         {
-            transaction = new TransactionBLL();
-            return transaction.PayInstallment_BLL(orderid);
+            try
+            {
+                transaction = new TransactionBLL();
+                return transaction.PayInstallment_BLL(orderid);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
+
+        public bool OrderProduct(string username, int productid, int schemeid)
+        {
+            try
+            {
+                p = new ProductBLL();
+                int rows = p.PlaceOrder(username, productid, schemeid);
+                if (rows == 4)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
+        public int UpdatePassword(string UserName, string NewPassword)
+        {
+            try
+            {
+                DBA = new UserBLL();
+                return DBA.updatepasswordinuserbll(UserName, NewPassword);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+        }
+
+        public DataTable GetMobileNumber(string UserName)
+        {
+            try
+            {
+                DBA = new UserBLL();
+                return DBA.GetMobileNumberinbill(UserName);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
     }
 }

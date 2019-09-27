@@ -13,7 +13,7 @@ namespace BLL
         static MyDataAccess SDBA;
         public string UserName { get; set; }
         public string FullName { get; set; }
-        public int PhoneNo { get; set; }
+        public Int64 PhoneNo { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
         public int CardTypeID { get; set; }
@@ -24,7 +24,7 @@ namespace BLL
         public int AccountNo { get; set; }
         public int BankID { get; set; }
         public int IFSCCode { get; set; }
-        public UserBLL(string FullName, int PhoneNo, string Email, string UserName, string Address, string Password, DateTime DateOfBirth, int CardTypeID, int BankID, int AccountNo, int IFSCCode, bool Verified, int CardNumber)
+        public UserBLL(string FullName, Int64 PhoneNo, string Email, string UserName, string Address, string Password, DateTime DateOfBirth, int CardTypeID, int BankID, int AccountNo, int IFSCCode, bool Verified, int CardNumber)
         {
             this.FullName = FullName;
             this.UserName = UserName;
@@ -41,6 +41,7 @@ namespace BLL
             this.CardTypeID = CardTypeID;
 
         }
+
         static UserBLL()
         {
             SDBA = new MyDataAccess("DBConnection");
@@ -57,41 +58,115 @@ namespace BLL
         {
             // TODO: Complete member initialization
         }
+
         internal int SaveinDB()
         {
-            return SDBA.AddUser(this);
+            try
+            {
+                return SDBA.AddUser(this);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         internal bool ValidateFromDB()
         {
-            if (SDBA.Login(this).Rows.Count > 0)
-                return true;
-            else
-                return false;
+            try
+            {
+                if (SDBA.Login(this).Rows.Count > 0)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         internal DataTable GetUserFromDB()
         {
-            return SDBA.Login(this);
+            try
+            {
+                return SDBA.Login(this);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         internal bool checkfromDB(string p)
         {
-            
-            if (SDBA.CheckUsername(p).Rows.Count > 0)
-                return true;
-            else
-                return false;
+            try
+            {
+                if (SDBA.CheckUsername(p).Rows.Count > 0)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         internal DataSet GetUser()
         {
-            return SDBA.GetUsers();
+            try
+            {
+                return SDBA.GetUsers();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         internal int Verify(string uname, int n)
         {
-            return SDBA.AdminUserVerification(uname, n);
+            try
+            {
+                return SDBA.AdminUserVerification(uname, n);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
+        internal int updatepasswordinuserbll(string username, string newpassword)
+        {
+            try
+            {
+                return SDBA.UpdatePassword(username, newpassword);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
+        internal DataTable GetMobileNumberinbill(string username)
+        {
+            try
+            {
+                return SDBA.GetMobileNumber(username);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
     }
 }

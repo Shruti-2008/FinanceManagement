@@ -11,7 +11,7 @@ namespace PLUserInterface
 {
     public partial class ProductList : System.Web.UI.Page
     {
-       
+  
         int selectedProductId;
         DataSet productset = new DataSet();
         protected void Page_Load(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace PLUserInterface
             BussinessHandler bh = new BussinessHandler();
             DataSet ds = bh.GetCategories();
 
-            // 
+            //
             //Response.Write(selectedCategory);
             //
             if (!IsPostBack)
@@ -55,7 +55,7 @@ namespace PLUserInterface
             //Label1.Text = DropDownList1.SelectedItem.Value.ToString();
             ListView1.DataBind();
 
-            // 
+            //
 
         }
 
@@ -106,4 +106,5 @@ namespace PLUserInterface
 
         }
     }
+    
 }

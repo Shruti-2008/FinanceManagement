@@ -26,17 +26,21 @@ namespace BLL
         {
             SDBA = new MyDataAccess("DBConnection");
         }
+
         public DataTable GetOrderHistory_BLL(string username)
+
         {
-            DataTable dt = SDBA.OrderHistory(username);
-            //dt.AcceptChanges();
-            //this.CardName = (string)dt.Rows[0]["cardname"];
-            //this.CardNumber = (long)dt.Rows[0]["cardnumber"];
-            //this.CardValidity = (DateTime)dt.Rows[0]["validity"];
-            //this.ActivationStatus = (bool)dt.Rows[0]["activationstatus"];
-            //this.CreditLimit = (decimal)dt.Rows[0]["creditlimit"];
-            //this.CreditBalance = (decimal)dt.Rows[0]["creditbalance"];
-            return dt;
+            try
+            {
+                DataTable dt = SDBA.OrderHistory(username);
+
+                return dt;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
     }
 }

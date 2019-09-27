@@ -127,11 +127,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="login-page">
         <div class="form">
-            <asp:Label ID="Label1" runat="server" Text="PhoneNo"></asp:Label>
+            <asp:Label ID="Label1" runat="server" Text="Username"></asp:Label>
             <div class="input">
-                <asp:TextBox ID="Phoneno" runat="server"></asp:TextBox>
+                <asp:TextBox ID="username" runat="server"></asp:TextBox>
             </div>
-            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="Phoneno" ErrorMessage="Please enter a valid phone number" ValidationExpression="^[789]\d{9}$"></asp:RegularExpressionValidator>
             <br />
             <asp:Button ID="Button1" runat="server" OnClick="VerifyOTPClick" Text="GET OTP" CssClass="button" />
             <br />
@@ -141,7 +140,7 @@
             <div class="input">
                 <asp:TextBox ID="otp" runat="server"></asp:TextBox>
             </div>
-            <asp:Button ID="Button2" runat="server" Text="VERIFY OTP" class="button" />
+            <asp:Button ID="Button2" runat="server" Text="VERIFY OTP" class="button" OnClick="Button2_Click" />
             <br />
             <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="otphidden" ControlToValidate="otp" ErrorMessage="OTP does not match"></asp:CompareValidator>
         </div>

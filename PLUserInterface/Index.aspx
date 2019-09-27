@@ -1,50 +1,71 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Local.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="PLUserInterface.Index" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script type="text/javascript">
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
     <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-    
-    /* Add a gray background color and some padding to the footer */
-    footer {
-      background-color: #f2f2f2;
-      padding: 25px;
-    }
-    
-  .carousel-inner img {
-      width: 100%; /* Set width to 100% */
-      margin: auto;
-      min-height:200px;
-  }
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
 
-  /* Hide the carousel text when the screen is less than 600 pixels wide */
-  @media (max-width: 600px) {
-    .carousel-caption {
-      display: none; 
-    }
-  }
-  
-  .carousel
-  {
-  width:100%;
-  height:50%;
-  }
-  </style>
+        /* Add a gray background color and some padding to the footer */
+        footer {
+            background-color: #f2f2f2;
+            padding: 25px;
+        }
+
+        .carousel-inner img {
+            width: 100%; /* Set width to 100% */
+            margin: auto;
+            min-height: 200px;
+        }
+
+        /* Hide the carousel text when the screen is less than 600 pixels wide */
+        @media (max-width: 600px) {
+            .carousel-caption {
+                display: none;
+            }
+        }
+
+        .carousel {
+            width: 100%;
+            height: 50%;
+        }
+    </style>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <asp:Image ImageUrl="images1/c1.jpg" ID="Image2" runat="server" />
-        </div>
-        <div class="carousel-item">
-            <asp:Image ImageUrl="images1/c2.jpg" ID="Image3" runat="server" />
-        </div>
-        <div class="carousel-item">
-            <asp:Image ImageUrl="images1/c3.jpg" ID="Image4" runat="server" />
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <asp:Image ImageUrl="images1/c1.jpg" ID="Image2" runat="server" />
+            </div>
+            <div class="carousel-item">
+                <asp:Image ImageUrl="images1/c2.jpg" ID="Image3" runat="server" />
+            </div>
+            <div class="carousel-item">
+                <asp:Image ImageUrl="images1/c3.jpg" ID="Image4" runat="server" />
+            </div>
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
     </div>
 
@@ -197,8 +218,10 @@
                     <div class="row">
                         <div class="footer-col col-md-4">
                             <h3>Location</h3>
-                            <p>Plot No. EL-200, TTC Electronic Zone Shil Phata - Mahape Road<br>
-                                Kopar Khairane, MIDC Industrial Area, Mahape, Navi Mumbai, Maharashtra 400710</p>
+                            <p>
+                                Plot No. EL-200, TTC Electronic Zone Shil Phata - Mahape Road<br>
+                                Kopar Khairane, MIDC Industrial Area, Mahape, Navi Mumbai, Maharashtra 400710
+                            </p>
                         </div>
                         <div class="footer-col col-md-4">
                         </div>

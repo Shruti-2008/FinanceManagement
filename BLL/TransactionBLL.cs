@@ -26,20 +26,29 @@ namespace BLL
 
         public DataTable GetAllEMIHistory_BLL(string username)
         {
-            DataTable dt = SDBA.UserEmiHistory(username);
-            //dt.AcceptChanges();
-            //this.CardName = (string)dt.Rows[0]["cardname"];
-            //this.CardNumber = (long)dt.Rows[0]["cardnumber"];
-            //this.CardValidity = (DateTime)dt.Rows[0]["validity"];
-            //this.ActivationStatus = (bool)dt.Rows[0]["activationstatus"];
-            //this.CreditLimit = (decimal)dt.Rows[0]["creditlimit"];
-            //this.CreditBalance = (decimal)dt.Rows[0]["creditbalance"];
-            return dt;
+            try
+            {
+                DataTable dt = SDBA.UserEmiHistory(username);
+                return dt;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         public int PayInstallment_BLL(int orderid)
         {
-            return SDBA.Payment(orderid);
+            try
+            {
+                return SDBA.Payment(orderid);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
     }
 }

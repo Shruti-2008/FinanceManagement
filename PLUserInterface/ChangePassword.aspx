@@ -122,30 +122,25 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div>
+     <div>
         <div class="login-page">
             <div class="form">
-                <asp:Label ID="Label1" runat="server" Text="Old Password"></asp:Label>
-                <div class="input">
-                    <asp:TextBox ID="oldpassword" runat="server"></asp:TextBox>
-                </div>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please Enter Password" ControlToValidate="oldpassword"></asp:RequiredFieldValidator>
+               
                 <br />
                 <asp:Label ID="Label3" runat="server" Text="New Password"></asp:Label>
                 <div class="input">
                     <asp:TextBox ID="newpassword" runat="server"></asp:TextBox>
                 </div>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Please Enter Password" ControlToValidate="newpassword"></asp:RequiredFieldValidator>
                 <br />
                 <asp:Label ID="Label2" runat="server" Text="Confirm Password"></asp:Label>
                 <div class="input">
                     <asp:TextBox ID="confirmpassword" runat="server"></asp:TextBox>
                 </div>
-                <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="The Password does not match" ControlToValidate="confirmpassword"></asp:CompareValidator>
+                <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="The Password does not match" ControlToValidate="confirmpassword" ControlToCompare="newpassword"></asp:CompareValidator>
                 <br />
                 <br />
                 <br />
-                <asp:Button ID="Button1" runat="server" Text="Save" class="button" />
+                <asp:Button ID="Button1" runat="server" Text="Save" class="button" OnClick="Button1_Click" />
                 <br />
             </div>
         </div>

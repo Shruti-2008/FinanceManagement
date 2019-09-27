@@ -21,9 +21,17 @@ namespace BLL
         }
         public DataSet GetAllCategories()
         {
-            DataSet ds = new DataSet();
-            ds = SDBA.CategoryList();
-            return ds;
+            try
+            {
+                DataSet ds = new DataSet();
+                ds = SDBA.CategoryList();
+                return ds;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
         
     }

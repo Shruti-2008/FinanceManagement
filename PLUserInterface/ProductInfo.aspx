@@ -88,17 +88,15 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <%--<asp:FormView ID="FormView1" runat="server" DataSourceID="ObjectDataSource1"></asp:FormView>--%>
     <%--<asp:ObjectDataSource ID="ObjectDataSource1" runat="server"></asp:ObjectDataSource>--%>
-
-
     <div class="container">
         <div class="form">
-            <asp:FormView ID="FormView1" runat="server" OnPageIndexChanging="FormView1_PageIndexChanging">
+            <asp:FormView ID="FormView1" runat="server" OnPageIndexChanging="FormView1_PageIndexChanging" >
 
                 <ItemTemplate>
                     <div class="row">
                         <div class="col-sm-4">
                             image:
-            
+           
                         <asp:Image ID="Image1" ImageUrl='<%#"data:Image/jpg;base64,"+Convert.ToBase64String((byte[])Eval("productimage"))%>' runat="server" Width="200px" Height="200px" />
                             <br />
                         </div>
@@ -106,9 +104,8 @@
                         <div class="col-sm-8" style="background-color: white; border: solid; border-color: green">
                             <br>
                             <div class="input">
-                                <br>
-                                name: This is the name of the productThis is the name of the productThis is the name of the productThis                           is the name of the productThis is the name of the productThis is the name of the productThis is the name                          of the productThis is the name of the productThis is the name of the productThis is the name of the                               productThis is the name of the productThis is the name of the productThis is the name of the productThis                          is the name of the productThis is the name of the productThis is the name of the productThis is the name                          of the productThis is the name of the productThis is the name of the productThis is the name of the                                productThis is the name of the productThis is the name of the productThis is the name of the                                      productThis is the name of the productThis is the name of the productThis is the name of the                                      productThis is the name of the productThis is the name of the productThis is the name of the                                       productThis is the name of the productThis is the name of the productThis is the name of the                                        productThis is the name of the productThis is the name of the productThis is the name of the                                        productThis is the name of the productThis is the name of the productThis is the name of the                                product
-                            <br>
+                                <br/>
+                              
                                 <span class="w3-text-blue">name:
                                 </span>
                                 <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("productname")  %>' />
@@ -127,28 +124,22 @@
                             <div class="input">
                                 <asp:Label ID="Label1" runat="server" Text="EMI TYPE:"></asp:Label>
                                 <br>
-                                <asp:DropDownList ID="DropDownList1" runat="server">
-                                    <asp:ListItem>3 months</asp:ListItem>
-                                    <asp:ListItem>6 months</asp:ListItem>
-                                    <asp:ListItem>9 months</asp:ListItem>
-                                    <asp:ListItem>12 months</asp:ListItem>
+                                <asp:DropDownList ID="DropDownList1" runat="server"  OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" AutoPostBack="true" >
+                                    <asp:ListItem Value="1">3 months</asp:ListItem>
+                                    <asp:ListItem Value="2">6 months</asp:ListItem>
+                                    <asp:ListItem Value="3">9 months</asp:ListItem>
+                                    <asp:ListItem Value="4">12 months</asp:ListItem>
                                 </asp:DropDownList>
-                                <%--<asp:DropDownList ID="DropDownList1" runat="server">
-                            <asp:ListItem>3 months</asp:ListItem>
-                            <asp:ListItem>6 months</asp:ListItem>
-                            <asp:ListItem>9 months</asp:ListItem>
-                            <asp:ListItem>12 months</asp:ListItem>
-                            </asp:DropDownList>--%>
+                               
                                 <br>
-                                <br>
-                                <asp:Button ID="Button1" runat="server" Text="Pay Now" class="btn btn-primary" />
+                                <asp:Button ID="Button1" runat="server" Text="Pay Now" class="btn btn-primary" OnClick="Button1_Click" />
 
                             </div>
                             <br>
                             <asp:CheckBox ID="CheckBox1" runat="server" AutoPostBack="true" OnCheckedChanged="CheckBox1_CheckedChanged" Checked="True" />By checking this you agree to our
                         <a data-toggle="modal" href="#Modal1">Terms and Conditions</a></p>
                        
-                        
+                        <asp:Label ID="Label2" runat="server" Text="Label" ></asp:Label>
 
                         </div>
                     </div>
@@ -178,13 +169,13 @@
                     2) Modification
           <br />
                     <br />
-                    We may modify any of the terms and conditions contained in this Agreement, without prior notice at any time and in our sole discretion, by posting a change notice or a new agreement on the Flipkart Site. 
+                    We may modify any of the terms and conditions contained in this Agreement, without prior notice at any time and in our sole discretion, by posting a change notice or a new agreement on the Flipkart Site.
           <br />
                     <br />
                     3) Limitation of Liability
           <br />
                     <br />
-                    We will not be liable for indirect, special, or consequential damages (or any loss of revenue, profits, or data) arising in connection with this Agreement or the Program, even if we have been advised of the possibility of such damages. 
+                    We will not be liable for indirect, special, or consequential damages (or any loss of revenue, profits, or data) arising in connection with this Agreement or the Program, even if we have been advised of the possibility of such damages.
           <br />
                     <br />
                 </div>

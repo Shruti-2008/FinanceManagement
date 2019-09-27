@@ -56,7 +56,6 @@ namespace DAL
             return result;
         }
 
-       
 
         public IDbConnection GetDatabasecOnnection()
         {

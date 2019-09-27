@@ -23,8 +23,10 @@ C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\PLUserInterface\bin\PLUserInterface.
 C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\PLUserInterface\bin\PLUserInterface.pdb
 C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\PLUserInterface\bin\AjaxControlToolkit.dll
 C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\PLUserInterface\bin\BLL.dll
+C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\PLUserInterface\bin\IronPdf.dll
 C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\PLUserInterface\bin\DataAccessLayer.dll
 C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\PLUserInterface\bin\BLL.pdb
+C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\PLUserInterface\bin\IronPdf.xml
 C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\PLUserInterface\bin\DataAccessLayer.pdb
 C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\PLUserInterface\obj\Debug\PLUserInterface.csprojResolveAssemblyReference.cache
 C:\Users\AW204_PC6\Desktop\FinanceCaseStudy\PLUserInterface\obj\Debug\PLUserInterface.dll

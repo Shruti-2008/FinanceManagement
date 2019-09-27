@@ -22,29 +22,68 @@ namespace BLL
         public dynamic ProdImage { get; set; }
         public ProductBLL Select()
         {
-            this.ProdID = 101;
-            this.ProdName = "Apple";
-            return this;
+            try
+            {
+                this.ProdID = 101;
+                this.ProdName = "Apple";
+                return this;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         public ProductBLL()
         {
             SDBA = new MyDataAccess("DBConnection");
         }
-
-       
+     
         public DataSet ProductCart(string username, int categoryid = 1)
         {
-            DataSet ds = new DataSet();
-            ds = SDBA.ProductCart(username, categoryid);
-            return ds;
+            try
+            {
+                DataSet ds = new DataSet();
+                ds = SDBA.ProductCart(username, categoryid);
+                return ds;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
+
         public DataSet ProductInfo(int productid)
         {
-            DataSet ds = new DataSet();
-            // this.ProdID = productid;
-            ds = SDBA.ProductInfo(productid);
-            return ds;
+            try
+            {
+                DataSet ds = new DataSet();
+                // this.ProdID = productid;
+                ds = SDBA.ProductInfo(productid);
+                return ds;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
+        public int PlaceOrder(string username, int productid, int schemeid)
+        {
+            try
+            {
+                int rowsAffected;
+                rowsAffected = SDBA.PlaceOrder(username, productid, schemeid);
+                return rowsAffected;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
     }
