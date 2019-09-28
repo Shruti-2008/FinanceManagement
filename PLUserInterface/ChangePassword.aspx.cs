@@ -14,30 +14,49 @@ namespace PLUserInterface
         protected void Page_Load(object sender, EventArgs e)
         {
             this.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
-            if (!Session.IsNewSession)
+            try
             {
-                Username = Session["Username"].ToString();
+                if (!Session.IsNewSession)
+                {
+                    Username = Session["Username"].ToString();
+                }
+                else
+                {
+                    Username = "NONE";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Username = "NONE";
+
+                string errormessage = ex.Message;
+                Response.Write("<script>alert('Session Expired :" + errormessage + "');</script>");
+                Response.Redirect("Index.aspx");
             }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            BussinessHandler bh = new BussinessHandler();
-            
-            var x = bh.UpdatePassword(Username, confirmpassword.Text);
-            if (x > 0)
+            try
             {
-                Response.Write("<script>alert('Your Password has been updated');</script>");
+                BussinessHandler bh = new BussinessHandler();
+
+                var x = bh.UpdatePassword(Username, confirmpassword.Text);
+                if (x > 0)
+                {
+                    Response.Write("<script>alert('Your Password has been updated');</script>");
+                }
+                else
+                {
+                    Response.Write("<script>alert('There was some error');</script>");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Response.Write("<script>alert('There was some error');</script>");
+                string errormessage = ex.Message;
+                Response.Write("<script>alert('DB Connection failed :" + errormessage + "');</script>");
+                Response.Redirect("Index.aspx");
             }
-           
+
         }
     }
 }

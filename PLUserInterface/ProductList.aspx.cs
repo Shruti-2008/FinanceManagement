@@ -11,49 +11,61 @@ namespace PLUserInterface
 {
     public partial class ProductList : System.Web.UI.Page
     {
-  
+
         int selectedProductId;
         DataSet productset = new DataSet();
         protected void Page_Load(object sender, EventArgs e)
         {
+
             this.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
-            Label lblLogin = (Label)Page.Master.FindControl("Label1");
-
-            if (!Session.IsNewSession)
+            try
             {
-                lblLogin.Text = Session["Username"].ToString();
-            }
-            else
-            {
-                lblLogin.Text = "{{Anonymous}}";
+                Label lblLogin = (Label)Page.Master.FindControl("Label1");
 
-            }
-
-            BussinessHandler bh = new BussinessHandler();
-            DataSet ds = bh.GetCategories();
-
-            //
-            //Response.Write(selectedCategory);
-            //
-            if (!IsPostBack)
-            {
-                if (ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
+                if (!Session.IsNewSession)
                 {
-                    DropDownList1.DataSource = ds.Tables[0];
-                    DropDownList1.DataTextField = ds.Tables[0].Columns["categoryname"].ToString();
-                    DropDownList1.DataValueField = ds.Tables[0].Columns["categoryid"].ToString();
-
-                    DropDownList1.DataBind();
+                    lblLogin.Text = Session["Username"].ToString();
+                }
+                else
+                {
+                    lblLogin.Text = "{{Anonymous}}";
 
                 }
+
+                BussinessHandler bh = new BussinessHandler();
+                DataSet ds = bh.GetCategories();
+
+                //
+                //Response.Write(selectedCategory);
+                //
+                if (!IsPostBack)
+                {
+                    if (ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        DropDownList1.DataSource = ds.Tables[0];
+                        DropDownList1.DataTextField = ds.Tables[0].Columns["categoryname"].ToString();
+                        DropDownList1.DataValueField = ds.Tables[0].Columns["categoryid"].ToString();
+
+                        DropDownList1.DataBind();
+
+                    }
+                }
+                int selectedCategory = Convert.ToInt32(DropDownList1.SelectedItem.Value);
+
+
+                productset = bh.GetProductsToCart(Session["Username"].ToString(), selectedCategory);
+                ListView1.DataSource = productset.Tables[0];
+                //Label1.Text = DropDownList1.SelectedItem.Value.ToString();
+                ListView1.DataBind();
             }
-            int selectedCategory = Convert.ToInt32(DropDownList1.SelectedItem.Value);
+            catch (Exception ex)
+            {
 
+                string errormessage = ex.Message;
+                Response.Write("<script>alert('Session Expired :" + errormessage + "');</script>");
+                Response.Redirect("Index.aspx");
+            }
 
-            productset = bh.GetProductsToCart(Session["Username"].ToString(), selectedCategory);
-            ListView1.DataSource = productset.Tables[0];
-            //Label1.Text = DropDownList1.SelectedItem.Value.ToString();
-            ListView1.DataBind();
 
             //
 
@@ -62,14 +74,26 @@ namespace PLUserInterface
         protected void ListView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            Label1.Text = ListView1.SelectedIndex.ToString();
-            Session["SelectedProduct"] = Convert.ToInt32(Label1.Text);
-            // Response.Write(Session["SelectedProduct"]);
-            int sessionindx = Convert.ToInt32(Session["SelectedProduct"]);
-            int productid = Convert.ToInt32(productset.Tables[0].Rows[sessionindx]["productid"]);
-            Label5.Text = productid.ToString();
-            Session["ProductId"] = productid;
-            Response.Redirect("ProductInfo.aspx");
+            try
+            {
+                Label1.Text = ListView1.SelectedIndex.ToString();
+                Session["SelectedProduct"] = Convert.ToInt32(Label1.Text);
+                // Response.Write(Session["SelectedProduct"]);
+                int sessionindx = Convert.ToInt32(Session["SelectedProduct"]);
+                int productid = Convert.ToInt32(productset.Tables[0].Rows[sessionindx]["productid"]);
+                int price = Convert.ToInt32(productset.Tables[0].Rows[sessionindx]["productid"]);
+                // Label5.Text = productid.ToString();
+                Session["ProductId"] = productid;
+                Session["price"] = price;
+                Response.Redirect("ProductInfo.aspx");
+            }
+            catch (Exception ex)
+            {
+
+                string errormessage = ex.Message;
+                Response.Write("<script>alert('Session Expired :" + errormessage + "');</script>");
+                Response.Redirect("Index.aspx");
+            }
         }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
@@ -105,6 +129,6 @@ namespace PLUserInterface
             selectedProductId = ListView1.SelectedIndex;
 
         }
+
     }
-    
 }

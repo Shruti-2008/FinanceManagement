@@ -2,149 +2,85 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    
-    <style>
-        @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
-        .login-page {
-            width: 360px;
-            padding: 8% 0 0;
-            margin: auto;
-        }
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <title></title>
 
-        .form {
-            position: relative;
-            z-index: 1;
-            background: #FFFFFF;
-            /*max-width: 400px;*/
-            margin: 0 auto 100px;
-            padding: 45px;
-            text-align: center;
-            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-        }
 
-        .input {
-            font-family: "Roboto", sans-serif;
-            outline: 0;
-            background: #f2f2f2;
-            width: 100%;
-            border: 0;
-            margin: 0 0 15px;
-            padding: 15px;
-            box-sizing: border-box;
-            font-size: 14px;
-        }
 
-        .button {
-            border-style: none;
-            border-color: inherit;
-            border-width: 0;
-            font-family: "Roboto", sans-serif;
-            text-transform: uppercase;
-            outline: 0;
-            background: #4CAF50;
-            padding: 15px;
-            color: #FFFFFF;
-            font-size: 14px;
-            -webkit-transition: all 0.3 ease;
-            transition: all 0.3 ease;
-            cursor: pointer;
-        }
-
-            .button:hover, .button:active, .button:focus {
-                background: #43A047;
-            }
-
-        .message {
-            margin: 15px 0 0;
-            color: #b3b3b3;
-            font-size: 20px;
-            text-align: center;
-        }
-
-            .message a {
-                color: #4CAF50;
-                text-decoration: none;
-                text-align: center;
-            }
-
-        .register-form {
-            display: none;
-        }
-
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 300px;
-            margin: 0 auto;
-        }
-
-            .container:before, .container:after {
-                content: "";
-                display: block;
-                clear: both;
-            }
-
-            .container .info {
-                margin: 50px auto;
-                text-align: center;
-            }
-
-                .container .info h1 {
-                    margin: 0 0 15px;
-                    padding: 0;
-                    font-size: 36px;
-                    font-weight: 300;
-                    color: #1a1a1a;
-                }
-
-                .container .info span {
-                    color: #4d4d4d;
-                    font-size: 12px;
-                }
-
-                    .container .info span a {
-                        color: #000000;
-                        text-decoration: none;
-                    }
-
-                    .container .info span .fa {
-                        color: #EF3B3A;
-                    }
-
-        body {
-            background: #76b852; /* fallback for old browsers */
-            background: -webkit-linear-gradient(right, #76b852, #8DC26F);
-            background: -moz-linear-gradient(right, #76b852, #8DC26F);
-            background: -o-linear-gradient(right, #76b852, #8DC26F);
-            background: linear-gradient(to left, #76b852, #8DC26F);
-            font-family: "Roboto", sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-    </style>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
 
-    <div class="login-page">
-        <div class="form">
-            <asp:Label ID="Label1" runat="server" Text="Username"></asp:Label>
-            <div class="input">
-                <asp:TextBox ID="username" runat="server"></asp:TextBox>
-            </div>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="username" ErrorMessage="Please enter the username"></asp:RequiredFieldValidator>
-            <br />
+    <body>
+        <div class="container">
 
-            <asp:Label ID="Label2" runat="server" Text="Password"></asp:Label>
-            <div class="input">
-                <asp:TextBox ID="password" runat="server"></asp:TextBox>
-            </div>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="password" ErrorMessage="Please enter the password"></asp:RequiredFieldValidator>
-            <p class="message">Forgot Password?<a href="ForgotPassword.aspx">Click here to Recover</a></p>
+            <fieldset>
 
-            <asp:Button ID="Button1" runat="server" class="button" Text="Login" OnClick="Login_Click" />
-            <p class="message">Not registered?<a href="Register.aspx">Create an account</a></p>
+                <!-- Form Name -->
+                <legend>
+                    <center><h2><b>LOGIN FORM</b></h2></center>
+                </legend>
+                <br />
+
+                <div class="form-group">
+                    <asp:Label ID="Label1" runat="server" Text="Username" class="col-md-4 control-label"></asp:Label>
+
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i>
+                                <asp:TextBox ID="username" runat="server"></asp:TextBox>
+                            </span>
+
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="username" ErrorMessage="Please enter the username"></asp:RequiredFieldValidator>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <asp:Label ID="Label2" runat="server" Text="Password" class="col-md-4 control-label"></asp:Label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i>
+                                <asp:TextBox ID="password" runat="server"></asp:TextBox>
+                            </span>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="password" ErrorMessage="Please enter the password"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <asp:Label ID="Label3" runat="server" Text="" class="col-md-4 control-label"></asp:Label>
+                    <div class="col-md-4">
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <span class="glyphicon glyphicon-send"></span>
+
+                        <asp:Button ID="Button2" runat="server" class="btn btn-warning" Text="Login" OnClick="Login_Click" />
+
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="form-group">
+                    <asp:Label ID="Label4" runat="server" Text="" class="col-md-4 control-label"></asp:Label>
+                    <div class="col-md-4">
+
+                        <asp:ValidationSummary ID="ValidationSummary1" runat="server" ShowMessageBox="True" ShowSummary="False" ValidationGroup="v2" />
+
+                        <p class="message">Forgot Password?<a href="ForgotPassword.aspx">Click here to Recover</a></p>
+                    </div>
+                </div>
+
+            </fieldset>
         </div>
-    </div>
+
+
+    </body>
 </asp:Content>

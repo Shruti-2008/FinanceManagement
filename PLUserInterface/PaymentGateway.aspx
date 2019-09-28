@@ -117,37 +117,29 @@
                 <div class="row">
 
                     <div class="col-50">
-                        <h3>Payment</h3>
-
-                        <div class="icon-container">
-                        </div>
+                        <h3>Payment Gateway</h3>
 
 
 
-                        <asp:Label ID="Label1" runat="server" Text="Label" for="ccnum">EMI number</asp:Label>
-                        <asp:TextBox ID="ccnum" runat="server" name="cardnumber"></asp:TextBox>
+                        <asp:Label ID="Label1" runat="server" Text="Card Number" ></asp:Label>
+                        <asp:TextBox ID="ccnum" runat="server" Text="7113 1500 2091" ReadOnly="true"></asp:TextBox>
 
-                        <asp:Label ID="Label2" runat="server" Text="Exp Month" for="expmonth"></asp:Label>
-                        <asp:TextBox ID="expmonth" runat="server" name="expmonth"></asp:TextBox>
+                        <asp:Label ID="Label2" runat="server" Text="CVV"></asp:Label>
+                        <asp:TextBox ID="expmonth" runat="server" Text="233" ReadOnly="true"></asp:TextBox>
 
                         <div class="row">
                             <div class="col-50">
 
-
-
-                                <asp:Label ID="Label3" runat="server" Text="Valid Till" for="expyear"></asp:Label>
-                                <asp:TextBox ID="expyear" runat="server"></asp:TextBox>
+                                <asp:Label ID="Label3" runat="server" Text="Valid Till"></asp:Label>
+                                <asp:TextBox ID="expyear" runat="server" Text="06/23" ReadOnly="true"></asp:TextBox>
                             </div>
                             <div class="col-50">
+                                <asp:Label ID="Label4" runat="server" Text="Amount Payable:"></asp:Label>
 
-
-
-                                <asp:Label ID="Label4" runat="server" Text="Password" for="cvv"></asp:Label>
-                                <asp:TextBox ID="cvv" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="TextBox1" runat="server" Text="Rs 800.00" ReadOnly="true"></asp:TextBox>
                             </div>
                         </div>
                     </div>
-
                 </div>
 
 

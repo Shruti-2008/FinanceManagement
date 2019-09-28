@@ -168,5 +168,31 @@ namespace BLL
                 throw;
             }
         }
+
+        internal DataSet GetVerifiedUser()
+        {
+            try
+            {
+                return SDBA.GetVerifiedUsers();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
+        internal string checkChangesinDB(string username)
+        {
+            try
+            {
+                return SDBA.Changes(username);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
     }
 }

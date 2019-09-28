@@ -6,10 +6,10 @@
 <head runat="server">
     <title>LTI Finance Local</title>
 
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
 
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
 
@@ -18,14 +18,20 @@
     <script src="Scripts/bootstrap.min.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-
+    
+    <style>
+        body
+        {
+            background-color:#0D2E69;
+        }
+    </style>
 
 </head>
 <body>
-    
-    <form id="form1" runat="server">
+
+    <form id="form1" runat="server" class="well form-horizontal">
         <div>
-            
+
             <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
                 <asp:HyperLink ID="HyperLink1" runat="server" class="navbar-brand" NavigateUrl="#">Navbar</asp:HyperLink>
@@ -38,12 +44,12 @@
                             <asp:HyperLink ID="HyperLink2" runat="server" class="nav-link" NavigateUrl="Register.aspx">Register</asp:HyperLink>
                         </li>
                         <li class="nav-item">
-                            <asp:HyperLink ID="HyperLink3" runat="server" class="nav-link" NavigateUrl="Login.aspx" >Login</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink3" runat="server" class="nav-link" NavigateUrl="Login.aspx">Login</asp:HyperLink>
                         </li>
                     </ul>
                 </div>
             </nav>
-            
+
 
             <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
             </asp:ContentPlaceHolder>

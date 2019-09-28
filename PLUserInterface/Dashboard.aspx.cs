@@ -28,66 +28,111 @@ namespace PLUserInterface
 
         public string username;
 
+        public string changes;
+
         decimal percentage;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
-
-            #region usersession
-            Label lblLogin = (Label)Page.Master.FindControl("Label1");
-            if (!Session.IsNewSession)
+            try
             {
-                lblLogin.Text = Session["Username"].ToString();
+                this.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
+
+                //Session["Username"] = "Shruti-2008";
+                #region usersession
+                Label lblLogin = (Label)Page.Master.FindControl("Label1");
+                if (!Session.IsNewSession)
+                {
+                    lblLogin.Text = Session["Username"].ToString();
+                }
+                else
+                {
+                    lblLogin.Text = "NONE";
+                }
+
+                #endregion
+
+                pnlPopup.Visible = false;
+
+                username = Session["Username"].ToString();
+
+                FillUserCardInfo(username);
+
+                FillOrderHistory(username);
+
+                allEMI_dt = bh.GetAllEMIHistory(username);
+
+                FillActiveEMITable();
+
+                Fetch();
             }
-            else
+            catch (Exception ex)
             {
-                lblLogin.Text = "NONE";
+                string errormessage = ex.Message;
+                Response.Write("<script>alert('Session Expired :" + errormessage + "');</script>");
+                Response.Redirect("Index.aspx");
             }
-            
-            #endregion
 
-            pnlPopup.Visible = false;
+        }
 
-             username = Session["Username"].ToString();
-
-            FillUserCardInfo(username);
-
-            FillOrderHistory(username);
-
-            allEMI_dt = bh.GetAllEMIHistory(username);
-
-            FillActiveEMITable();
-
+        protected void Fetch()
+        {
+            try
+            {
+                changes = bh.CheckChanges(username);
+                if (!string.IsNullOrEmpty(changes))
+                    Response.Write("<script>alert('" + changes + "');</script>");
+            }
+            catch
+            {
+            }
         }
 
         protected void FillActiveEMITable()
         {
-            activeEMI_dt = order_dt.Clone();
-            activeEMI_dt.Columns.Add("EMIduedate", typeof(System.DateTime));
-            foreach (DataRow row in order_dt.Rows)
+            try
             {
-                if (Convert.ToDecimal(row["balance"]) > 1)
+                activeEMI_dt = order_dt.Clone();
+                activeEMI_dt.Columns.Add("EMIduedate", typeof(System.DateTime));
+                foreach (DataRow row in order_dt.Rows)
                 {
-                    activeEMI_dt.Rows.Add(row.ItemArray);
+                    if (Convert.ToDecimal(row["balance"]) > 1)
+                    {
+                        activeEMI_dt.Rows.Add(row.ItemArray);
+                    }
                 }
-            }
-            DateTime today = DateTime.Now.Date;
-            foreach (DataRow row in activeEMI_dt.Rows)
-            {
-                row["EMIduedate"] = new DateTime(today.Year, today.Month + 1, 1).AddDays(-1);
-            }
+                DateTime today = DateTime.Now.Date;
+                foreach (DataRow row in activeEMI_dt.Rows)
+                {
+                    row["EMIduedate"] = new DateTime(today.Year, today.Month + 1, 1).AddDays(-1);
+                }
 
-            ActiveEMI_gridview.DataSource = activeEMI_dt;
-            ActiveEMI_gridview.DataBind();
+                ActiveEMI_gridview.DataSource = activeEMI_dt;
+                ActiveEMI_gridview.DataBind();
+            }
+            catch (Exception ex)
+            {
+
+                string errormessage = ex.Message;
+                Response.Write("<script>alert('Error Signing In :" + errormessage + "');</script>");
+            }
         }
 
         protected void FillOrderHistory(string username)
         {
             //bh = new BussinessHandler();
-            order_dt = bh.GetOrderHistory(username);
-            OrderHistory_gridview.DataSource = order_dt;
-            OrderHistory_gridview.DataBind();
+            try
+            {
+                order_dt = bh.GetOrderHistory(username);
+                OrderHistory_gridview.DataSource = order_dt;
+                OrderHistory_gridview.DataBind();
+            }
+            catch (Exception ex)
+            {
+
+                string errormessage = ex.Message;
+                Response.Write("<script>alert('Error Getting Order history :" + errormessage + "');</script>");
+            }
 
         }
 
@@ -99,7 +144,7 @@ namespace PLUserInterface
                 Decimal total1 = Convert.ToDecimal(total);
                 string used = DetailsView2.Rows[1].Cells[1].Text.ToString();
                 Decimal used1 = Convert.ToDecimal(used);
-                Decimal YourPercentage = ((total1-used1) * 100) / total1;
+                Decimal YourPercentage = ((total1 - used1) * 100) / total1;
 
                 YourPercentagePanel.Attributes["aria-valuemin"] = "0";
                 YourPercentagePanel.Attributes["aria-valuemax"] = "100";
@@ -118,116 +163,160 @@ namespace PLUserInterface
         {
             //bh = new BussinessHandler();
 
-            DataTable cd = bh.GetCardInfo(username);
-            cd.Columns.Add("username", typeof(System.String));
-            cd.Columns.Add("creditused", typeof(System.Decimal));
-            foreach (DataRow row in cd.Rows)
+            try
             {
-                row["creditused"] = (decimal)row["creditlimit"] - (decimal)row["creditbalance"];
-                row["username"] = username;
+                DataTable cd = bh.GetCardInfo(username);
+                cd.Columns.Add("username", typeof(System.String));
+                cd.Columns.Add("creditused", typeof(System.Decimal));
+                foreach (DataRow row in cd.Rows)
+                {
+                    row["creditused"] = (decimal)row["creditlimit"] - (decimal)row["creditbalance"];
+                    row["username"] = username;
+                }
+                percentage = (decimal)cd.Rows[0]["creditbalance"] / (decimal)cd.Rows[0]["creditlimit"] * 100;
+                Session["validity"] = cd.Rows[0]["validity"].ToString();
+                DetailsView1.DataSource = cd;
+                DetailsView1.DataBind();
 
+                DetailsView2.DataSource = cd;
+                DetailsView2.DataBind();
             }
-            percentage = (decimal)cd.Rows[0]["creditbalance"] / (decimal)cd.Rows[0]["creditlimit"] * 100;
-            DetailsView1.DataSource = cd;
-            DetailsView1.DataBind();
-            Session["validity"] = cd.Rows[0]["validity"].ToString(); 
-            DetailsView2.DataSource = cd;
-            DetailsView2.DataBind();
+            catch (Exception ex)
+            {
+
+                string errormessage = ex.Message;
+                Response.Write("<script>alert('Error Signing In :" + errormessage + "');</script>");
+            }
         }
 
         protected void MyButtonClick(object sender, System.EventArgs e)
         {
-            Button btn = (Button)sender;
-            GridViewRow selectedRow = (GridViewRow)btn.NamingContainer;
+            try
+            {
+                Button btn = (Button)sender;
+                GridViewRow selectedRow = (GridViewRow)btn.NamingContainer;
 
-            int orderid = Convert.ToInt32(selectedRow.Cells[0].Text);
-            DataTable dt = GetOrderSpecificEMI(orderid);
-            Response.Write("<script>alert('Fetching details')</script>");
-            OrderSpecific_gridview.DataSource = dt;
-            OrderSpecific_gridview.DataBind();
-            pnlPopup.Visible = true;
+                int orderid = Convert.ToInt32(selectedRow.Cells[0].Text);
+                DataTable dt = GetOrderSpecificEMI(orderid);
+                Response.Write("<script>alert('Fetching details')</script>");
+                OrderSpecific_gridview.DataSource = dt;
+                OrderSpecific_gridview.DataBind();
+                pnlPopup.Visible = true;
 
-            ActiveEMI_gridview.DataBind();
-            OrderHistory_gridview.DataBind();
+                ActiveEMI_gridview.DataBind();
+                OrderHistory_gridview.DataBind();
+            }
+            catch (Exception ex)
+            {
+
+                string errormessage = ex.Message;
+                Response.Write("<script>alert('Error Fetching Details:" + errormessage + "');</script>");
+            }
         }
 
         protected DataTable GetOrderSpecificEMI(int orderid)
         {
-            orderspecific_dt = allEMI_dt.Clone();
-
-            foreach (DataRow row in allEMI_dt.Rows)
+            try
             {
-                if (orderid.ToString() == row["orderid"].ToString())
+                orderspecific_dt = allEMI_dt.Clone();
+
+                foreach (DataRow row in allEMI_dt.Rows)
                 {
-                    orderspecific_dt.Rows.Add(row.ItemArray);
+                    if (orderid.ToString() == row["orderid"].ToString())
+                    {
+                        orderspecific_dt.Rows.Add(row.ItemArray);
+                    }
                 }
+
+            }
+            catch (Exception ex)
+            {
+                string errormessage = ex.Message;
+                Response.Write("<script>alert('Error Getting Order Details  :" + errormessage + "');</script>");
             }
             return orderspecific_dt;
         }
 
         protected void PayNow_btn_Click(object sender, EventArgs e)
         {
-            bh = new BussinessHandler();
-
-            Button btn = (Button)sender;
-            GridViewRow selectedRow = (GridViewRow)btn.NamingContainer;
-            int orderid = Convert.ToInt32(selectedRow.Cells[0].Text);
-            int status = bh.PayInstallment(orderid);
-            if (status == 0)
+            try
             {
-                Response.Write("<script>alert('Payment Failed')</script>");
-            }
-            else
-            {
-                Response.Write("<script>alert('Payment Successful')</script>");
-            }
+                bh = new BussinessHandler();
 
-            allEMI_dt = bh.GetAllEMIHistory(username);
-            FillActiveEMITable();
-            FillOrderHistory(username);
+                Button btn = (Button)sender;
+                GridViewRow selectedRow = (GridViewRow)btn.NamingContainer;
+                int orderid = Convert.ToInt32(selectedRow.Cells[0].Text);
+                int status = bh.PayInstallment(orderid);
+                if (status == 0)
+                {
+                    Response.Write("<script>alert('Payment Failed')</script>");
+                }
+                else
+                {
+                    Response.Write("<script>alert('Payment Successful')</script>");
+                }
+
+                allEMI_dt = bh.GetAllEMIHistory(username);
+                FillActiveEMITable();
+                FillOrderHistory(username);
+            }
+            catch (Exception ex)
+            {
+
+                string errormessage = ex.Message;
+                Response.Write("<script>alert('Error During Payment :" + errormessage + "');</script>");
+            }
         }
 
         protected void ActiveEMI_gridview_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType != DataControlRowType.DataRow)
+            try
             {
-                return;
-            }
-
-            Button button = (Button)e.Row.FindControl("PayNow_btn");
-
-            DateTime today = DateTime.Now.Date;
-            int currmonth = today.Month;
-            int curryear = today.Year;
-
-            int oid = Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "orderid"));
-            DataTable dt = GetOrderSpecificEMI(oid);
-            bool flag = false;
-            foreach (DataRow r in dt.Rows)
-            {
-                DateTime transactiondate = Convert.ToDateTime(r["transactiondate"]);
-                int month = transactiondate.Month;
-                int year = transactiondate.Year;
-                if (currmonth == month && curryear == year)
+                if (e.Row.RowType != DataControlRowType.DataRow)
                 {
-                    flag = true;
-                    break;
+                    return;
                 }
+
+                Button button = (Button)e.Row.FindControl("PayNow_btn");
+
+                DateTime today = DateTime.Now.Date;
+                int currmonth = today.Month;
+                int curryear = today.Year;
+
+                int oid = Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "orderid"));
+                DataTable dt = GetOrderSpecificEMI(oid);
+                bool flag = false;
+                foreach (DataRow r in dt.Rows)
+                {
+                    DateTime transactiondate = Convert.ToDateTime(r["transactiondate"]);
+                    int month = transactiondate.Month;
+                    int year = transactiondate.Year;
+                    if (currmonth == month && curryear == year)
+                    {
+                        flag = true;
+                        break;
+                    }
+                }
+                if (flag == true)
+                    button.Enabled = false;
+                else
+                    button.Enabled = true;
             }
-            if (flag == true)
-                button.Enabled = false;
-            else
-                button.Enabled = true;
+            catch (Exception ex)
+            {
+                
+                string errormessage = ex.Message;
+                Response.Write("<script>alert('Error connecting DB :"+errormessage+"');</script>");
+            }
 
             //int Id = (int)((DataRowView)e.Row.DataItem)["Id"];
         }
+
 
         protected void Saveaspdf_Click(object sender, EventArgs e)
         {
             IronPdf.AspxToPdf.RenderThisPageAsPdf(IronPdf.AspxToPdf.FileBehavior.InBrowser);
         }
 
-        
-       
     }
 }

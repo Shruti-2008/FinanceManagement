@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -16,57 +17,80 @@ namespace PLUserInterface
         protected void Page_Load(object sender, EventArgs e)
         {
             this.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
-            Button2.Enabled = false;
-            Button2.Visible= false;
-            if(CompareValidator1.IsValid)
-            {
-                Button2.Enabled = true;
-                Button2.Visible= true;
-            }
-            else
+            try
             {
                 Button2.Enabled = false;
                 Button2.Visible = false;
+                if (CompareValidator1.IsValid)
+                {
+                    Button2.Enabled = true;
+                    Button2.Visible = true;
+                }
+                else
+                {
+                    Button2.Enabled = false;
+                    Button2.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                string errormessage = ex.Message;
+                Response.Write("<script>alert('Session Expired :" + errormessage + "');</script>");
+                Response.Redirect("Index.aspx");
             }
 
         }
+
         public string sendSMS()
         {
-            BussinessHandler bh = new BussinessHandler();
-
-            var x = bh.GetMobileNumber(username.Text);
-            if (x == null)
+            string result="";
+            try
             {
-                Response.Write("<script>alert('Invalid UserName');</script>");
-            }
-            else
-            {
-                number = x.Rows[0]["phoneno"].ToString();
-            }
+                BussinessHandler bh = new BussinessHandler();
 
-
-            Random r = new Random();
-            int m = r.Next(100000, 1000000);
-            otphidden.Text = m.ToString();
-
-            //String number = Phoneno.Text;
-            String message = HttpUtility.UrlEncode("This is your OTP to reset password:" + m + ". OTP expires in 10 minutes.");
-            using (var wb = new WebClient())
-            {
-                byte[] response = wb.UploadValues("https://api.textlocal.in/send/", new NameValueCollection()
+                var x = bh.GetMobileNumber(username.Text);
+                if (x == null)
                 {
-                {"apikey" , "4r9VhU/eCFY-u6EJaIQawQMcrTuyNS9NoV3XGMDJ9t"},
+                    Response.Write("<script>alert('Invalid UserName');</script>");
+                }
+                else
+                {
+                    number = x.Rows[0]["phoneno"].ToString();
+                }
+
+
+                Random r = new Random();
+                int m = r.Next(100000, 1000000);
+                otphidden.Text = m.ToString();
+
+                //String number = Phoneno.Text;
+                String message = HttpUtility.UrlEncode("This is your OTP to reset password:" + m + ". OTP expires in 10 minutes.");
+                using (var wb = new WebClient())
+                {
+                    byte[] response = wb.UploadValues("https://api.textlocal.in/send/", new NameValueCollection()
+                {
+                {"apikey" , "RZIjimkiHQY-PwCs2bMnmVhRxtkK6gm0ZlFVgxqDzV"},
                 {"numbers" , number},
                 {"message" , message},
                 {"sender" , "TXTLCL"}
                 });
 
+                    result = System.Text.Encoding.UTF8.GetString(response);
 
-                string result = System.Text.Encoding.UTF8.GetString(response);
+                    //return 1;
+                }
                 return result;
-                //return 1;
             }
-            
+
+            catch (Exception)
+            {
+
+
+                Response.Write("<script>alert('Invalid UserName');</script>");
+            }
+
+            return result;
         }
 
 
@@ -74,7 +98,7 @@ namespace PLUserInterface
         {
             Session["Username"] = username.Text;
             Response.Write(sendSMS());
-            
+
         }
 
         protected void Button2_Click(object sender, EventArgs e)
@@ -88,5 +112,5 @@ namespace PLUserInterface
                 Response.Write("<script>alert;</script>");
             }
         }
-    }       
+    }
 }

@@ -28,13 +28,13 @@ namespace PLUserInterface
                 lblLogin.Text = "{{Anonymous}}";
 
             }
-            
+            //Session["validity"] = "2020-03-25";
 
 
             if (!IsPostBack)
             {
                 BussinessHandler bh = new BussinessHandler();
-                Response.Write(Session["ProductId"]);
+                //  Response.Write(Session["ProductId"]);
                 DataSet ds = bh.GetProductInfo((int)Session["ProductId"]);
                 FormView1.DataSource = ds.Tables[0];
                 FormView1.DataBind();
@@ -44,21 +44,24 @@ namespace PLUserInterface
             int selectedTenureId = Convert.ToInt32(DropDownList1.SelectedItem.Value);
             DateTime vdate = Convert.ToDateTime(Session["validity"].ToString());
             DateTime newdate = DateTime.Now.Date.AddMonths(selectedTenureId * 3);
-            Response.Write(newdate);
-            //Label Label3 = (Label)FormView1.FindControl("Label3");
+            // Response.Write(newdate);
+            Label Label3 = (Label)FormView1.FindControl("Label3");
+            Label Label7 = (Label)FormView1.FindControl("Label7");
+            Label7.Text = "₹ " + (Convert.ToInt32(Session["price"]) / (selectedTenureId * 3)).ToString();
             Button Button1 = (Button)FormView1.FindControl("Button1");
+            if (checkbox1 == null || checkbox1.Checked == true)
+            {
+                Label3.Text = "";
+                Button1.Enabled = true;
+            }
             if (DateTime.Compare(vdate, newdate) < 0)
             {
 
-                //Label3.Text = "Sorry, your EMI tenure exceeds the validity period. Please select again.";
+                Label3.Text = "Sorry, your EMI tenure exceeds your card validity period. Please select again.";
 
                 Button1.Enabled = false;
             }
-            else if (checkbox1 == null || checkbox1.Checked == true)
-            {
-                //Label3.Text = "";
-                Button1.Enabled = true;
-            }
+
             Label Label2 = (Label)FormView1.FindControl("Label2");
             Session["schemeid"] = selectedTenureId;
 
@@ -92,10 +95,7 @@ namespace PLUserInterface
             Response.Redirect("PaymentGateway.aspx");
         }
 
-        protected void FormView1_PageIndexChanging(object sender, FormViewPageEventArgs e)
-        {
 
-        }
 
     }
 }

@@ -24,7 +24,7 @@ namespace PLUserInterface
                 BussinessHandler bh = new BussinessHandler();
 
                 if (bh.RegisterFunction
-                    (name.Text, Convert.ToInt64(phoneno.Text), email.Text, username.Text, address.Text, password.Text, Calendar1.SelectedDate, Convert.ToInt32(RadioButtonList1.SelectedValue), Convert.ToInt32(selectbank.SelectedValue), Convert.ToInt32(accountno.Text), Convert.ToInt32(ifsccode.Text), false, 1234) > 1)
+                    (name.Text, Convert.ToInt64(phoneno.Text), email.Text, username.Text, address.Text, password.Text, Convert.ToDateTime(TextBox1.Text), Convert.ToInt32(RadioButtonList1.SelectedValue), Convert.ToInt32(selectbank.SelectedValue), Convert.ToInt32(accountno.Text), Convert.ToInt32(ifsccode.Text), false, 1234) > 1)
                 {
                     try
                     {
@@ -50,23 +50,24 @@ namespace PLUserInterface
                         smtp.EnableSsl = true;
                         smtp.Send(mail);
                     }
-                    catch
+                    catch(SmtpException ex)
                     {
-
+                        string errormessage = ex.Message;
+                        Response.Write("<script>alert('Error Sending Mail:" + errormessage + "');</script>");
+                        Response.Redirect("Dashboard.aspx");
                     }
 
                     Response.Redirect("Dashboard.aspx");
                 }
                 else
                 {
-                    Response.Write("<script>alert('Error');</script>");
-
+                    Response.Write("<script>alert('Registeration Error');</script>");
                 }
             }
             catch (Exception ex)
             {
                 string errormessage = ex.Message;
-                Response.Write("<script>alert(errormessage);</script>");
+                Response.Write("<script>alert('Error Registering In :" + errormessage + "');</script>");
             }
         }
 
@@ -77,17 +78,16 @@ namespace PLUserInterface
                 BussinessHandler bh = new BussinessHandler();
                 if (bh.UserExists(username.Text))
                 {
-                    UpdateMsg.Text = "Exists";
+                    UpdateMsg.Text = "User Already Exists";
                 }
                 else
                 {
-                    UpdateMsg.Text = "No exists";
+                    UpdateMsg.Text = "Valid Username";
                 }
             }
             catch (Exception ex)
             {
-                string errormessage = ex.Message;
-                Response.Write("<script>alert(errormessage);</script>");
+                UpdateMsg.Text = "Error Checking in DB:"+ex.Message;
             }
         }
     }

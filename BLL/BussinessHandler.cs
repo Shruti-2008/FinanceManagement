@@ -255,5 +255,36 @@ namespace BLL
             }
         }
 
+
+        public DataSet GetVerifiedUserFunction()
+        {
+
+            try
+            {
+                DBA = new UserBLL();
+                return DBA.GetVerifiedUser();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        
+
+        }
+
+        public string CheckChanges(string username)
+        {
+            try
+            {
+                UserBLL usr = new UserBLL();
+                return usr.checkChangesinDB(username);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
     }
 }

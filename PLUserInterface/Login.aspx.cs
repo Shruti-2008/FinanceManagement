@@ -18,31 +18,33 @@ namespace PLUserInterface
 
         protected void Login_Click(object sender, EventArgs e)
         {
-            BussinessHandler bh = new BussinessHandler();
-            var x = bh.Authorize(username.Text, password.Text);
-
-            if (x == null)
+            try
             {
-                Response.Write("<script>alert('Invalid UserName or Password');</script>");
+                BussinessHandler bh = new BussinessHandler();
+                var x = bh.Authorize(username.Text, password.Text);
+
+                if (x == null)
+                {
+                    Response.Write("<script>alert('Invalid UserName or Password');</script>");
+                }
+                else if (x.TableName == "admin")
+                {
+                    Session["Username"] = "Admin";
+                    Response.Redirect("AdminPage.aspx");
+                }
+                else
+                {
+                    Session["Username"] = x.Rows[0]["username"].ToString();
+                    Session["Verified"] = x.Rows[0]["verified"].ToString();
+                    Session["CardTypeid"] = x.Rows[0]["cardtypeid"].ToString();
+                    Session["Validated"] = x.Rows[0]["activationstatus"].ToString();
+                    Response.Redirect("Dashboard.aspx");
+                }
             }
-            else if (x.TableName == "admin")
+            catch (Exception ex)
             {
-                Session["Username"] = "Admin";
-                Response.Redirect("AdminPage.aspx");
-            }
-            else
-            {
-                Session["Username"] = x.Rows[0]["username"].ToString();
-                Session["Verified"] = x.Rows[0]["verified"].ToString();
-                Session["CardTypeid"] = x.Rows[0]["cardtypeid"].ToString();
-                Session["Validated"] = x.Rows[0]["activationstatus"].ToString();
-
-                Response.Write(Session["Username"]);
-                Response.Write(Session["Verified"]);
-                Response.Write(Session["CardTypeid"]);
-                Response.Write(Session["Validated"]);
-
-                Response.Redirect("Dashboard.aspx");
+                string errormessage = ex.Message;
+                Response.Write("<script>alert('Error Signing In :"+errormessage+"');</script>");
             }
 
         }

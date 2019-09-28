@@ -15,7 +15,7 @@ namespace DAL
 
         public MyDataAccess(string ConnName)
         {
-            dbManager = new DBManager(ConnName);         
+            dbManager = new DBManager(ConnName);
         }
 
         public DataTable CheckUsername(dynamic username)
@@ -28,7 +28,7 @@ namespace DAL
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }
@@ -44,7 +44,7 @@ namespace DAL
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }
@@ -73,7 +73,7 @@ namespace DAL
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }
@@ -83,11 +83,10 @@ namespace DAL
             try
             {
                 parameters = new List<IDbDataParameter>();
-                return dbManager.GetDataSet("GetAllUsers", CommandType.StoredProcedure, parameters.ToArray());
+                return dbManager.GetDataSet("GetUnVerifiedUsers", CommandType.StoredProcedure, parameters.ToArray());
             }
             catch (Exception)
             {
-                
                 throw;
             }
         }
@@ -102,7 +101,7 @@ namespace DAL
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }
@@ -117,7 +116,7 @@ namespace DAL
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }
@@ -132,7 +131,7 @@ namespace DAL
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }
@@ -148,7 +147,7 @@ namespace DAL
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }
@@ -162,7 +161,7 @@ namespace DAL
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }
@@ -177,7 +176,7 @@ namespace DAL
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }
@@ -195,7 +194,7 @@ namespace DAL
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }
@@ -210,7 +209,7 @@ namespace DAL
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }
@@ -226,7 +225,7 @@ namespace DAL
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }
@@ -242,7 +241,7 @@ namespace DAL
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }
@@ -257,9 +256,35 @@ namespace DAL
             }
             catch (Exception)
             {
+
+                throw;
+            }
+        }
+
+        public DataSet GetVerifiedUsers()
+        {
+            try
+            {
+                parameters = new List<IDbDataParameter>();
+                return dbManager.GetDataSet("GetVerifiedUsers", CommandType.StoredProcedure, parameters.ToArray());
+            }
+            catch (Exception)
+            {
                 
                 throw;
             }
         }
+
+        public string Changes(string username)
+        {
+            parameters = new List<IDbDataParameter>();
+            parameters.Add(dbManager.CreateParameter("@username", username, DbType.String));
+            DataTable tb = dbManager.GetDataTable("FetchChanges_tbl", CommandType.StoredProcedure, parameters.ToArray());
+
+            return tb.Rows[0]["Changes"].ToString();
+        }
+
     }
+
+
 }
